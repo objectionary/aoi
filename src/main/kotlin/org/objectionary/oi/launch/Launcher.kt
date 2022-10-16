@@ -1,6 +1,6 @@
 package org.objectionary.oi.launch
 
-import org.objectionary.oi.transform.XslTransformer
+import org.objectionary.ddr.transform.XslTransformer
 import org.slf4j.LoggerFactory
 import org.w3c.dom.Document
 import java.io.File
