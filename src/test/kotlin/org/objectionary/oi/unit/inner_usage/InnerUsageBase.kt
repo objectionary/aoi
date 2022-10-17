@@ -26,7 +26,7 @@ package org.objectionary.oi.unit.inner_usage
 
 import TestBase
 import org.apache.commons.io.FileUtils
-import org.objectionary.oi.launch.documents
+import org.objectionary.ddr.launch.documents
 import org.slf4j.LoggerFactory
 import java.io.BufferedReader
 import java.io.ByteArrayOutputStream

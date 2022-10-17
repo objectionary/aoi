@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="maven-antrun-" default="main">
+  <target name="main">
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="maven.plugin.classpath" />
+    <property environment="env" />
+    <available file="xcop" filepath="/home/olesya/.nvm/versions/node/v18.7.0/bin:/home/olesya/.cargo/bin:/home/olesya/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/olesya/.local/share/JetBrains/Toolbox/scripts" property="xcop.present" />
+    <if>
+      <equals arg2="true" arg1="${xcop.present}" />
+      <then>
+        <patternset id="xcop.main">
+          <include name="**/*.xml" />
+          <include name="**/*.xsl" />
+          <include name="**/*.xsd" />
+          <exclude name="**/target/**/*" />
+          <exclude name=".idea/**/*" />
+        </patternset>
+        <condition property="xcop.excludes.defined">
+          <isreference refid="xcop.excludes" />
+        </condition>
+        <if>
+          <equals arg2="true" arg1="${xcop.excludes.defined}" />
+          <then>
+            <fileset id="files" dir=".">
+              <patternset refid="xcop.main" />
+              <patternset refid="xcop.excludes" />
+            </fileset>
+            <pathconvert property="converted" pathsep=" " refid="files" />
+          </then>
+          <else>
+            <fileset id="files" dir=".">
+              <patternset refid="xcop.main" />
+            </fileset>
+            <pathconvert property="converted" pathsep=" " refid="files" />
+          </else>
+        </if>
+        <condition property="os.windows">
+          <os family="windows" />
+        </condition>
+        <if>
+          <equals arg2="true" arg1="${os.windows}" />
+          <then>
+            <exec failonerror="true" executable="cmd">
+              <arg line="/c xcop" />
+              <arg value="--license" />
+              <arg value="LICENSE.txt" />
+              <arg line="${converted}" />
+            </exec>
+          </then>
+          <else>
+            <exec failonerror="true" executable="xcop">
+              <arg value="--license" />
+              <arg value="LICENSE.txt" />
+              <arg line="${converted}" />
+            </exec>
+          </else>
+        </if>
+      </then>
+      <else>
+        <echo message="XCOP is not available in PATH" />
+      </else>
+    </if>
+  </target>
+</project>

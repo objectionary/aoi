@@ -135,6 +135,11 @@
             <version>0.28.9</version>
         </dependency>
         <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.3</version>
+        </dependency>
+        <dependency>
             <groupId>org.eolang</groupId>
             <artifactId>eo-maven-plugin</artifactId>
             <version>0.28.9</version>
