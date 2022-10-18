@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package org.objectionary.oi.unit.inner_usage
+package org.objectionary.aoi.unit.inner_usage
 
 import org.junit.jupiter.api.Test
 import kotlin.test.Ignore

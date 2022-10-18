@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package org.objectionary.oi.launch
+package org.objectionary.aoi.launch
 
 /**
  * @param args command line arguments

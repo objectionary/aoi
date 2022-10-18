@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package org.objectionary.oi.unit.inner_usage
+package org.objectionary.aoi.unit.inner_usage
 
 import TestBase
 import org.apache.commons.io.FileUtils

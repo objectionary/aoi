@@ -1,4 +1,4 @@
-package org.objectionary.oi.launch
+package org.objectionary.aoi.launch
 
 import org.objectionary.ddr.graph.AttributesSetter
 import org.objectionary.ddr.graph.CondAttributesSetter
