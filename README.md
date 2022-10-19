@@ -8,4 +8,4 @@
 [![Hits-of-Code](https://hitsofcode.com/github/objectionary/aoi)](https://hitsofcode.com/view/github/objectionary/aoi)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/objectionary/aoi/blob/master/LICENSE.txt)
 
-AOI is a project aiming at performing Abstract Object Inference for [EO](https://www.eolang.org) Programs
+AOI is a project aiming at performing Abstract Object Inference for [EO](https://www.eolang.org) Programs.
