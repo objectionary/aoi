@@ -111,7 +111,7 @@
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test-junit5</artifactId>
-            <version>1.7.10</version>
+            <version>1.7.20</version>
             <scope>test</scope>
         </dependency>
         <dependency>
