@@ -1,5 +1,7 @@
 package org.objectionary.aoi.launch
 
+import org.objectionary.aoi.data.FreeAttributesHolder
+import org.objectionary.aoi.process.InnerUsageProcessor
 import org.objectionary.ddr.graph.AttributesSetter
 import org.objectionary.ddr.graph.CondAttributesSetter
 import org.objectionary.ddr.graph.InnerPropagator
@@ -20,4 +22,7 @@ fun launch(path: String) {
     attributesSetter.pushAttributes()
     val innerPropagator = InnerPropagator(graph)
     innerPropagator.propagateInnerAttrs()
+    InnerUsageProcessor(graph).processInnerUsages()
+    FreeAttributesHolder.storage
+    println()
 }

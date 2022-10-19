@@ -1,11 +1,31 @@
 package org.objectionary.aoi.process
 
+import org.objectionary.aoi.data.Attribute
+import org.objectionary.aoi.data.FreeAttribute
+import org.objectionary.aoi.data.FreeAttributesHolder
+import org.objectionary.ddr.graph.base
+import org.objectionary.ddr.graph.line
+import org.objectionary.ddr.graph.name
 import org.objectionary.ddr.graph.repr.Graph
 
 class InnerUsageProcessor(private val graph: Graph) {
     fun processInnerUsages() {
-        graph.initialObjects.forEach {
-
+        graph.igNodes.forEach {obj ->
+            val xmirNode = obj.body
+            val children = xmirNode.childNodes
+            for (i in 0..children.length) {
+                val ch = children.item(i)
+                if (base(ch) == null && name(ch) != null && line(ch) == line(xmirNode)) {
+                    FreeAttributesHolder.storage.add(FreeAttribute(name(ch)!!, xmirNode))
+                }
+                if (base(ch) != null) {
+                    FreeAttributesHolder.storage.find { it.name == base(ch) && it.holderObject == xmirNode }?.let { fa ->
+                        base(ch.nextSibling.nextSibling)?.let {
+                            fa.appliedAttributes.add(Attribute(it))
+                        }
+                    }
+                }
+            }
         }
     }
 }

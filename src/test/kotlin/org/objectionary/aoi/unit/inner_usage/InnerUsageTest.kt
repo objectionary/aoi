@@ -29,6 +29,5 @@ import kotlin.test.Ignore
 
 class InnerUsageTest : InnerUsageBase() {
     @Test
-    @Ignore
-    fun `test basic dir`() = doTest()
+    fun `test inner usages`() = doTest()
 }
