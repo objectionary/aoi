@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+package org.objectionary.aoi
+
 import java.io.File
 import kotlin.test.assertEquals
 

@@ -1,5 +1,6 @@
 package org.objectionary.aoi.launch
 
+import org.objectionary.aoi.process.InnerUsageProcessor
 import org.objectionary.ddr.graph.AttributesSetter
 import org.objectionary.ddr.graph.CondAttributesSetter
 import org.objectionary.ddr.graph.InnerPropagator
@@ -11,6 +12,11 @@ import java.io.File
 private val logger = LoggerFactory.getLogger("org.objectionary.oi.launch.Launcher")
 private val sep = File.separatorChar
 
+/**
+ * Aggregates the whole pipeline.
+ *
+ * @param path to input directory
+ */
 fun launch(path: String) {
     documents.clear()
     val graph = buildGraph(path, false)
@@ -20,4 +26,5 @@ fun launch(path: String) {
     attributesSetter.pushAttributes()
     val innerPropagator = InnerPropagator(graph)
     innerPropagator.propagateInnerAttrs()
+    InnerUsageProcessor(graph).processInnerUsages()
 }

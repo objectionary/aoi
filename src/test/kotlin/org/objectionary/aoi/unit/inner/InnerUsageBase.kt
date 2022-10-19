@@ -22,16 +22,17 @@
  * SOFTWARE.
  */
 
-package org.objectionary.aoi.unit.inner_usage
+package org.objectionary.aoi.unit.inner
 
-import TestBase
-import org.apache.commons.io.FileUtils
+import org.objectionary.aoi.TestBase
+import org.objectionary.aoi.process.InnerUsageProcessor
+import org.objectionary.ddr.graph.AttributesSetter
+import org.objectionary.ddr.graph.CondAttributesSetter
+import org.objectionary.ddr.graph.InnerPropagator
+import org.objectionary.ddr.launch.buildGraph
 import org.objectionary.ddr.launch.documents
 import org.slf4j.LoggerFactory
-import java.io.BufferedReader
-import java.io.ByteArrayOutputStream
 import java.io.File
-import java.nio.file.Paths
 
 /**
  * Base class for graph builder testing
@@ -42,22 +43,24 @@ open class InnerUsageBase : TestBase {
     override fun doTest() {
         val path = getTestName()
         documents.clear()
-        val out = ByteArrayOutputStream()
-        // ...
-        val actual = String(out.toByteArray())
-        val bufferedReader: BufferedReader = File(constructOutPath(path)).bufferedReader()
-        val expected = bufferedReader.use { it.readText() }
-        logger.debug(actual)
-        checkOutput(expected, actual)
-        try {
-            val tmpDir =
-                Paths.get("${constructInPath(path).replace('/', sep).substringBeforeLast(sep)}${sep}TMP").toString()
-            FileUtils.deleteDirectory(File(tmpDir))
-        } catch (e: Exception) {
-            logger.error(e.printStackTrace().toString())
-        }
+        val graph = buildGraph(constructInPath(path), false)
+        CondAttributesSetter(graph).processConditions()
+        val attributesSetter = AttributesSetter(graph)
+        attributesSetter.setDefaultAttributes()
+        attributesSetter.pushAttributes()
+        val innerPropagator = InnerPropagator(graph)
+        innerPropagator.propagateInnerAttrs()
+        InnerUsageProcessor(graph).processInnerUsages()
+        // todo add the rest of the test
     }
 
     override fun constructOutPath(directoryName: String): String =
-        "src${sep}test${sep}resources${sep}unit${sep}out${sep}builder$sep$directoryName.txt"
+        File(System.getProperty("user.dir")).resolve(
+            File("src${sep}test${sep}resources${sep}unit${sep}out$sep$directoryName")
+        ).absolutePath.replace("/", File.separator)
+
+    override fun constructInPath(directoryName: String): String =
+        File(System.getProperty("user.dir")).resolve(
+            File("src${sep}test${sep}resources${sep}unit${sep}in$sep$directoryName")
+        ).absolutePath.replace("/", File.separator)
 }
