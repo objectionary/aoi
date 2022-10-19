@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-package org.objectionary.aoi.unit.inner_usage
+package org.objectionary.aoi.unit.inner
 
 import org.junit.jupiter.api.Test
-import kotlin.test.Ignore
 
 class InnerUsageTest : InnerUsageBase() {
     @Test

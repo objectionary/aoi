@@ -22,24 +22,17 @@
  * SOFTWARE.
  */
 
-package org.objectionary.aoi.unit.inner_usage
+package org.objectionary.aoi.unit.inner
 
-import TestBase
-import org.apache.commons.io.FileUtils
-import org.objectionary.aoi.data.FreeAttributesHolder
+import org.objectionary.aoi.TestBase
 import org.objectionary.aoi.process.InnerUsageProcessor
 import org.objectionary.ddr.graph.AttributesSetter
 import org.objectionary.ddr.graph.CondAttributesSetter
 import org.objectionary.ddr.graph.InnerPropagator
 import org.objectionary.ddr.launch.buildGraph
 import org.objectionary.ddr.launch.documents
-import org.objectionary.ddr.launch.launch
 import org.slf4j.LoggerFactory
-import java.io.BufferedReader
-import java.io.ByteArrayOutputStream
 import java.io.File
-import java.nio.file.Files
-import java.nio.file.Paths
 
 /**
  * Base class for graph builder testing
@@ -58,8 +51,7 @@ open class InnerUsageBase : TestBase {
         val innerPropagator = InnerPropagator(graph)
         innerPropagator.propagateInnerAttrs()
         InnerUsageProcessor(graph).processInnerUsages()
-        FreeAttributesHolder.storage
-        println()
+        // todo add the rest of the test
     }
 
     override fun constructOutPath(directoryName: String): String =

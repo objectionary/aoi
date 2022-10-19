@@ -8,7 +8,13 @@ import org.objectionary.ddr.graph.line
 import org.objectionary.ddr.graph.name
 import org.objectionary.ddr.graph.repr.Graph
 
+/**
+ * Processes usages of free attributes that occur inside the parent object body
+ */
 class InnerUsageProcessor(private val graph: Graph) {
+    /**
+     * Processes inner usages
+     */
     fun processInnerUsages() {
         graph.igNodes.forEach {obj ->
             val xmirNode = obj.body
@@ -18,7 +24,7 @@ class InnerUsageProcessor(private val graph: Graph) {
                 if (base(ch) == null && name(ch) != null && line(ch) == line(xmirNode)) {
                     FreeAttributesHolder.storage.add(FreeAttribute(name(ch)!!, xmirNode))
                 }
-                if (base(ch) != null) {
+                base(ch)?.let {
                     FreeAttributesHolder.storage.find { it.name == base(ch) && it.holderObject == xmirNode }?.let { fa ->
                         base(ch.nextSibling.nextSibling)?.let {
                             fa.appliedAttributes.add(Attribute(it))
