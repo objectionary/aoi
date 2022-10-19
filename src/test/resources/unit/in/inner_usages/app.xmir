@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<program ms="152"
+          name="app"
+          source="/home/olesya/example/app.eo"
+          time="2022-10-19T09:33:18.115156299Z"
+          version="0.28.10">
+   <listing>[] &gt; cat
+  [] &gt; talk
+    QQ.io.stdout &gt; @
+      "Meow!"
+  [dir] &gt; move
+    QQ.io.stdout &gt; @
+      dir
+
+[] &gt; dog
+  [] &gt; talk
+    QQ.io.stdout &gt; @
+      "Woof!"
+  [dir] &gt; move
+    QQ.io.stdout &gt; @
+      dir
+  [] &gt; smth
+    QQ.io.stdout &gt; @
+      "smth"
+
+[x] &gt; some_object
+  x.talk &gt; heh
+  x.move "left" &gt; @
+
+[x] &gt; other_object
+  x.talk &gt; @
+  x.smth &gt; hih
+
+[] &gt; app
+  some_object dog &gt; so
+  so &gt; @
+</listing>
+   <errors/>
+   <sheets/>
+   <objects>
+      <o abstract="" line="1" name="cat" pos="0">
+         <o abstract="" line="2" name="talk" pos="2">
+            <o base="QQ" line="3" pos="4"/>
+            <o base=".io" line="3" method="" pos="6"/>
+            <o base=".stdout" line="3" method="" name="@" pos="9">
+               <o base="string" data="string" line="4" pos="6">Meow!</o>
+            </o>
+         </o>
+         <o abstract="" line="5" name="move" pos="2">
+            <o line="5" name="dir" pos="3"/>
+            <o base="QQ" line="6" pos="4"/>
+            <o base=".io" line="6" method="" pos="6"/>
+            <o base=".stdout" line="6" method="" name="@" pos="9">
+               <o base="dir" line="7" pos="6"/>
+            </o>
+         </o>
+      </o>
+      <o abstract="" line="9" name="dog" pos="0">
+         <o abstract="" line="10" name="talk" pos="2">
+            <o base="QQ" line="11" pos="4"/>
+            <o base=".io" line="11" method="" pos="6"/>
+            <o base=".stdout" line="11" method="" name="@" pos="9">
+               <o base="string" data="string" line="12" pos="6">Woof!</o>
+            </o>
+         </o>
+         <o abstract="" line="13" name="move" pos="2">
+            <o line="13" name="dir" pos="3"/>
+            <o base="QQ" line="14" pos="4"/>
+            <o base=".io" line="14" method="" pos="6"/>
+            <o base=".stdout" line="14" method="" name="@" pos="9">
+               <o base="dir" line="15" pos="6"/>
+            </o>
+         </o>
+         <o abstract="" line="16" name="smth" pos="2">
+            <o base="QQ" line="17" pos="4"/>
+            <o base=".io" line="17" method="" pos="6"/>
+            <o base=".stdout" line="17" method="" name="@" pos="9">
+               <o base="string" data="string" line="18" pos="6">smth</o>
+            </o>
+         </o>
+      </o>
+      <o abstract="" line="20" name="some_object" pos="0">
+         <o line="20" name="x" pos="1"/>
+         <o base="x" line="21" pos="2"/>
+         <o base=".talk" line="21" method="" name="heh" pos="3"/>
+         <o base="x" line="22" pos="2"/>
+         <o base=".move" line="22" method="" name="@" pos="3">
+            <o base="string" data="string" line="22" pos="9">left</o>
+         </o>
+      </o>
+      <o abstract="" line="24" name="other_object" pos="0">
+         <o line="24" name="x" pos="1"/>
+         <o base="x" line="25" pos="2"/>
+         <o base=".talk" line="25" method="" name="@" pos="3"/>
+         <o base="x" line="26" pos="2"/>
+         <o base=".smth" line="26" method="" name="hih" pos="3"/>
+      </o>
+      <o abstract="" line="28" name="app" pos="0">
+         <o base="some_object" line="29" name="so" pos="2">
+            <o base="dog" line="29" pos="14"/>
+         </o>
+         <o base="so" line="30" name="@" pos="2"/>
+      </o>
+   </objects>
+</program>
