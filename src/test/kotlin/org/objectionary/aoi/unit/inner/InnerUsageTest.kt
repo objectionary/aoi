@@ -28,5 +28,8 @@ import org.junit.jupiter.api.Test
 
 class InnerUsageTest : InnerUsageBase() {
     @Test
-    fun `test inner usages`() = doTest()
+    fun `test basic`() = doTest()
+
+    @Test
+    fun `test several parameters`() = doTest()
 }
