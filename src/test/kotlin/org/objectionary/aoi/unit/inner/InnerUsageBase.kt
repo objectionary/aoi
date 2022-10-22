@@ -30,7 +30,6 @@ import org.objectionary.aoi.process.InnerUsageProcessor
 import org.objectionary.ddr.graph.AttributesSetter
 import org.objectionary.ddr.graph.CondAttributesSetter
 import org.objectionary.ddr.graph.InnerPropagator
-import org.objectionary.ddr.graph.repr.Graph
 import org.objectionary.ddr.launch.buildGraph
 import org.objectionary.ddr.launch.documents
 import org.slf4j.LoggerFactory
