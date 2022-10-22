@@ -1,8 +1,8 @@
 package org.objectionary.aoi.process
 
-import org.objectionary.aoi.data.Parameter
 import org.objectionary.aoi.data.FreeAttribute
 import org.objectionary.aoi.data.FreeAttributesHolder
+import org.objectionary.aoi.data.Parameter
 import org.objectionary.ddr.graph.base
 import org.objectionary.ddr.graph.line
 import org.objectionary.ddr.graph.name
