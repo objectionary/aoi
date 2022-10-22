@@ -1,6 +1,6 @@
 package org.objectionary.aoi.process
 
-import org.objectionary.aoi.data.Attribute
+import org.objectionary.aoi.data.Parameter
 import org.objectionary.aoi.data.FreeAttribute
 import org.objectionary.aoi.data.FreeAttributesHolder
 import org.objectionary.ddr.graph.base
@@ -27,7 +27,7 @@ class InnerUsageProcessor(private val graph: Graph) {
                 base(ch)?.let {
                     FreeAttributesHolder.storage.find { it.name == base(ch) && it.holderObject == xmirNode }?.let { fa ->
                         base(ch.nextSibling.nextSibling)?.let {
-                            fa.appliedAttributes.add(Attribute(it))
+                            fa.appliedAttributes.add(Parameter(it))
                         }
                     }
                 }
