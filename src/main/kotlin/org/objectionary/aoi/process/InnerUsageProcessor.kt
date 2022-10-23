@@ -16,7 +16,7 @@ class InnerUsageProcessor(private val graph: Graph) {
      * Processes inner usages
      */
     fun processInnerUsages() {
-        graph.igNodes.forEach {obj ->
+        graph.igNodes.forEach { obj ->
             val xmirNode = obj.body
             val children = xmirNode.childNodes
             for (i in 0..children.length) {
@@ -25,11 +25,12 @@ class InnerUsageProcessor(private val graph: Graph) {
                     FreeAttributesHolder.storage.add(FreeAttribute(name(ch)!!, xmirNode))
                 }
                 base(ch)?.let {
-                    FreeAttributesHolder.storage.find { it.name == base(ch) && it.holderObject == xmirNode }?.let { fa ->
-                        base(ch.nextSibling.nextSibling)?.let {
-                            fa.appliedAttributes.add(Parameter(it))
+                    FreeAttributesHolder.storage.find { it.name == base(ch) && it.holderObject == xmirNode }
+                        ?.let { fa ->
+                            base(ch.nextSibling.nextSibling)?.let {
+                                fa.appliedAttributes.add(Parameter(it))
+                            }
                         }
-                    }
                 }
             }
         }

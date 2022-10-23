@@ -22,28 +22,11 @@
  * SOFTWARE.
  */
 
-package org.objectionary.aoi.unit.inner
+package org.objectionary.aoi.unit.instance
 
-import org.objectionary.aoi.process.InnerUsageProcessor
-import org.objectionary.aoi.unit.UnitTestBase
-import org.objectionary.ddr.graph.repr.Graph
-import java.io.File
+import org.junit.jupiter.api.Test
 
-/**
- * Base class for graph builder testing
- */
-open class InnerUsageBase : UnitTestBase() {
-    override fun testSteps(graph: Graph) {
-        InnerUsageProcessor(graph).processInnerUsages()
-    }
-
-    override fun constructOutPath(directoryName: String): String =
-        File(System.getProperty("user.dir")).resolve(
-            File("src${sep}test${sep}resources${sep}unit${sep}out${sep}inner_usages$sep$directoryName.txt")
-        ).absolutePath.replace("/", File.separator)
-
-    override fun constructInPath(directoryName: String): String =
-        File(System.getProperty("user.dir")).resolve(
-            File("src${sep}test${sep}resources${sep}unit${sep}in${sep}inner_usages$sep$directoryName")
-        ).absolutePath.replace("/", File.separator)
+class InstanceUsageTest : InstanceUsageBase() {
+    @Test
+    fun `test basic`() = doTest()
 }
