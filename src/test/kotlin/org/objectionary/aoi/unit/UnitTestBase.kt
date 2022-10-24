@@ -1,23 +1,24 @@
 package org.objectionary.aoi.unit
 
-import org.apache.commons.io.FileUtils
 import org.objectionary.aoi.TestBase
 import org.objectionary.aoi.data.FreeAttributesHolder
-import org.objectionary.aoi.process.InnerUsageProcessor
 import org.objectionary.ddr.graph.AttributesSetter
 import org.objectionary.ddr.graph.CondAttributesSetter
 import org.objectionary.ddr.graph.InnerPropagator
 import org.objectionary.ddr.graph.repr.Graph
 import org.objectionary.ddr.launch.buildGraph
 import org.objectionary.ddr.launch.documents
+import org.apache.commons.io.FileUtils
 import org.slf4j.LoggerFactory
 import java.io.BufferedReader
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.nio.file.Paths
 
+/**
+ * Base for unit testing
+ */
 open class UnitTestBase : TestBase {
-
     private val logger = LoggerFactory.getLogger(this.javaClass.name)
 
     override fun doTest() {
@@ -48,6 +49,12 @@ open class UnitTestBase : TestBase {
         }
     }
 
+    /**
+     * Steps to perform inside the test
+     *
+     * @param graph to be analyzed
+     */
+    @Suppress("EMPTY_BLOCK_STRUCTURE_ERROR")
     open fun testSteps(graph: Graph) {}
 
     private fun printAttributes(out: ByteArrayOutputStream) {
@@ -58,5 +65,4 @@ open class UnitTestBase : TestBase {
     }
 
     override fun constructOutPath(directoryName: String) = ""
-
 }

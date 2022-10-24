@@ -33,8 +33,7 @@ class InstanceUsageProcessor(private val graph: Graph) {
                             )
                         )
                         FreeAttributesHolder.storage.find {
-                            it.name == base(obj)!!.removePrefix(".")
-                                    && it.holderObject == parentAbstract
+                            it.name == base(obj)!!.removePrefix(".") && it.holderObject == parentAbstract
                         }?.appliedAttributes?.add(Parameter(base(application)!!))
                     }
                 }
