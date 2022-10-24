@@ -25,6 +25,7 @@
 package org.objectionary.aoi.unit.instance
 
 import org.objectionary.aoi.process.InnerUsageProcessor
+import org.objectionary.aoi.process.InstanceUsageProcessor
 import org.objectionary.aoi.unit.UnitTestBase
 import org.objectionary.ddr.graph.repr.Graph
 import java.io.File
@@ -35,15 +36,16 @@ import java.io.File
 open class InstanceUsageBase : UnitTestBase() {
     override fun testSteps(graph: Graph) {
         InnerUsageProcessor(graph).processInnerUsages()
+        InstanceUsageProcessor(graph).processInstanceUsages()
     }
 
     override fun constructOutPath(directoryName: String): String =
         File(System.getProperty("user.dir")).resolve(
-            File("src${sep}test${sep}resources${sep}unit${sep}out${sep}inner_usages$sep$directoryName.txt")
+            File("src${sep}test${sep}resources${sep}unit${sep}out${sep}instance_usages$sep$directoryName.txt")
         ).absolutePath.replace("/", File.separator)
 
     override fun constructInPath(directoryName: String): String =
         File(System.getProperty("user.dir")).resolve(
-            File("src${sep}test${sep}resources${sep}unit${sep}in${sep}inner_usages$sep$directoryName")
+            File("src${sep}test${sep}resources${sep}unit${sep}in${sep}instance_usages$sep$directoryName")
         ).absolutePath.replace("/", File.separator)
 }
