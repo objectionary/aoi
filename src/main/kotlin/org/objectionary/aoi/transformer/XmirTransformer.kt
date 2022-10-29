@@ -1,6 +1,5 @@
 package org.objectionary.aoi.transformer
 
-import org.objectionary.aoi.data.FreeAttribute
 import org.objectionary.aoi.data.FreeAttributesHolder
 import org.objectionary.ddr.graph.name
 import org.objectionary.ddr.graph.repr.Graph
@@ -17,10 +16,16 @@ import javax.xml.transform.dom.DOMSource
 import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource
 
+/**
+ * Transforms xmir documents by adding an aoi section to each of them
+ */
 class XmirTransformer(
     private val graph: Graph,
     private val documents: MutableMap<Document, String>
 ) {
+    /**
+     * Aggregates the process of adding an aoi section to xmir documents
+     */
     fun addAoiSection() {
         documents.forEach { doc ->
             val program = doc.key.getElementsByTagName("program").item(0)
@@ -31,6 +36,7 @@ class XmirTransformer(
         transformDocuments()
     }
 
+    @Suppress("CUSTOM_LABEL")
     private fun addAoiChildren(parent: Element) {
         FreeAttributesHolder.storage
             .filter { it.holderObject.ownerDocument == parent.ownerDocument }
@@ -40,13 +46,10 @@ class XmirTransformer(
                 obj.setAttribute("fqn", fqn)
                 val inferred: Element = parent.ownerDocument.createElement("inferred")
                 graph.igNodes.filter { node ->
-                    if (node.name == null) return@filter false
-
+                    node.name ?: return@filter false
                     for (attr in el.appliedAttributes) {
                         // @todo #14:30min differentiate not only by name but also by the number of parameters
-                        if (node.attributes.find { it.name == attr.name.substring(1) } == null) {
-                            return@filter false
-                        }
+                        node.attributes.find { it.name == attr.name.substring(1) } ?: return@filter false
                     }
                     return@filter true
                 }.forEach {

@@ -19,9 +19,9 @@ private val sep = File.separatorChar
  *
  * @param path to input directory
  */
-fun launch(path: String, gather: Boolean = false) {
+fun launch(path: String) {
     documents.clear()
-    val graph = buildGraph(path, gather)
+    val graph = buildGraph(path, false)
     CondAttributesSetter(graph).processConditions()
     val attributesSetter = AttributesSetter(graph)
     attributesSetter.setDefaultAttributes()

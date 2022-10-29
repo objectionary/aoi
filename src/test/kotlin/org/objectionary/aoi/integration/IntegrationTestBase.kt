@@ -25,9 +25,9 @@
 package org.objectionary.aoi.integration
 
 import org.objectionary.aoi.TestBase
-import org.apache.commons.io.FileUtils
 import org.objectionary.aoi.launch.launch
 import org.objectionary.ddr.launch.documents
+import org.apache.commons.io.FileUtils
 import org.slf4j.LoggerFactory
 import java.io.BufferedReader
 import java.io.File
@@ -43,7 +43,7 @@ open class IntegrationTestBase : TestBase {
     override fun doTest() {
         val path = getTestName()
         documents.clear()
-        launch(constructInPath(path), false)
+        launch(constructInPath(path))
         val actualFiles: MutableList<String> = mutableListOf()
         Files.walk(Paths.get(constructOutPath(path)))
             .filter(Files::isRegularFile)

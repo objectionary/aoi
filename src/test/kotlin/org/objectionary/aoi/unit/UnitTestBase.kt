@@ -9,7 +9,6 @@ import org.objectionary.ddr.graph.repr.Graph
 import org.objectionary.ddr.launch.buildGraph
 import org.objectionary.ddr.launch.documents
 import org.apache.commons.io.FileUtils
-import org.objectionary.aoi.transformer.XmirTransformer
 import org.slf4j.LoggerFactory
 import java.io.BufferedReader
 import java.io.ByteArrayOutputStream
