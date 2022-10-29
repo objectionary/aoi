@@ -1,6 +1,8 @@
 package org.objectionary.aoi.launch
 
 import org.objectionary.aoi.process.InnerUsageProcessor
+import org.objectionary.aoi.process.InstanceUsageProcessor
+import org.objectionary.aoi.transformer.XmirTransformer
 import org.objectionary.ddr.graph.AttributesSetter
 import org.objectionary.ddr.graph.CondAttributesSetter
 import org.objectionary.ddr.graph.InnerPropagator
@@ -27,4 +29,7 @@ fun launch(path: String) {
     val innerPropagator = InnerPropagator(graph)
     innerPropagator.propagateInnerAttrs()
     InnerUsageProcessor(graph).processInnerUsages()
+    InstanceUsageProcessor(graph).processInstanceUsages()
+    val transformer = XmirTransformer(graph, documents)
+    transformer.addAoiSection()
 }
