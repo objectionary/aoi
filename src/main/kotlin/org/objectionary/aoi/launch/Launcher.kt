@@ -1,6 +1,8 @@
 package org.objectionary.aoi.launch
 
 import org.objectionary.aoi.process.InnerUsageProcessor
+import org.objectionary.aoi.process.InstanceUsageProcessor
+import org.objectionary.aoi.transformer.XmirTransformer
 import org.objectionary.ddr.graph.AttributesSetter
 import org.objectionary.ddr.graph.CondAttributesSetter
 import org.objectionary.ddr.graph.InnerPropagator
@@ -17,9 +19,9 @@ private val sep = File.separatorChar
  *
  * @param path to input directory
  */
-fun launch(path: String) {
+fun launch(path: String, gather: Boolean = false) {
     documents.clear()
-    val graph = buildGraph(path, false)
+    val graph = buildGraph(path, gather)
     CondAttributesSetter(graph).processConditions()
     val attributesSetter = AttributesSetter(graph)
     attributesSetter.setDefaultAttributes()
@@ -27,4 +29,7 @@ fun launch(path: String) {
     val innerPropagator = InnerPropagator(graph)
     innerPropagator.propagateInnerAttrs()
     InnerUsageProcessor(graph).processInnerUsages()
+    InstanceUsageProcessor(graph).processInstanceUsages()
+    val transformer = XmirTransformer(graph, documents)
+    transformer.addAoiSection()
 }

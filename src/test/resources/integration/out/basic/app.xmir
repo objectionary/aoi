@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<program ms="143"
+<program ms="152"
           name="app"
           source="/home/olesya/example/app.eo"
-          time="2022-10-22T14:21:44.226152913Z"
+          time="2022-10-19T09:33:18.115156299Z"
           version="0.28.10">
    <listing>[] &gt; cat
   [] &gt; talk
@@ -23,13 +23,13 @@
     QQ.io.stdout &gt; @
       "smth"
 
-[x y] &gt; some_object
+[x] &gt; some_object
+  x.talk &gt; heh
   x.move "left" &gt; @
-  y.talk &gt; meh
-  y.smth &gt; ff
 
 [x] &gt; other_object
   x.talk &gt; @
+  x.smth &gt; hih
 
 [] &gt; app
   some_object dog &gt; so
@@ -85,20 +85,19 @@
       </o>
       <o abstract="" line="20" name="some_object" pos="0">
          <o line="20" name="x" pos="1"/>
-         <o line="20" name="y" pos="3"/>
          <o base="x" line="21" pos="2" ref="20"/>
-         <o base=".move" line="21" method="" name="@" pos="3">
-            <o base="string" data="string" line="21" pos="9">left</o>
+         <o base=".talk" line="21" method="" name="heh" pos="3"/>
+         <o base="x" line="22" pos="2" ref="20"/>
+         <o base=".move" line="22" method="" name="@" pos="3">
+            <o base="string" data="string" line="22" pos="9">left</o>
          </o>
-         <o base="y" line="22" pos="2" ref="20"/>
-         <o base=".talk" line="22" method="" name="meh" pos="3"/>
-         <o base="y" line="23" pos="2" ref="20"/>
-         <o base=".smth" line="23" method="" name="ff" pos="3"/>
       </o>
-      <o abstract="" line="25" name="other_object" pos="0">
-         <o line="25" name="x" pos="1"/>
-         <o base="x" line="26" pos="2" ref="25"/>
-         <o base=".talk" line="26" method="" name="@" pos="3"/>
+      <o abstract="" line="24" name="other_object" pos="0">
+         <o line="24" name="x" pos="1"/>
+         <o base="x" line="25" pos="2" ref="24"/>
+         <o base=".talk" line="25" method="" name="@" pos="3"/>
+         <o base="x" line="26" pos="2" ref="24"/>
+         <o base=".smth" line="26" method="" name="hih" pos="3"/>
       </o>
       <o abstract="" line="28" name="app" pos="0">
          <o base="some_object" line="29" name="so" pos="2" ref="20">
@@ -108,6 +107,44 @@
       </o>
    </objects>
    <aoi>
-      <aoii/>
+      <obj fqn="cat.move.dir">
+         <inferred>
+            <obj fqn="cat"/>
+            <obj fqn="cat.talk"/>
+            <obj fqn="cat.move"/>
+            <obj fqn="dog"/>
+            <obj fqn="dog.talk"/>
+            <obj fqn="dog.move"/>
+            <obj fqn="dog.smth"/>
+            <obj fqn="some_object"/>
+            <obj fqn="other_object"/>
+            <obj fqn="app"/>
+         </inferred>
+      </obj>
+      <obj fqn="dog.move.dir">
+         <inferred>
+            <obj fqn="cat"/>
+            <obj fqn="cat.talk"/>
+            <obj fqn="cat.move"/>
+            <obj fqn="dog"/>
+            <obj fqn="dog.talk"/>
+            <obj fqn="dog.move"/>
+            <obj fqn="dog.smth"/>
+            <obj fqn="some_object"/>
+            <obj fqn="other_object"/>
+            <obj fqn="app"/>
+         </inferred>
+      </obj>
+      <obj fqn="some_object.x">
+         <inferred>
+            <obj fqn="cat"/>
+            <obj fqn="dog"/>
+         </inferred>
+      </obj>
+      <obj fqn="other_object.x">
+         <inferred>
+            <obj fqn="dog"/>
+         </inferred>
+      </obj>
    </aoi>
 </program>

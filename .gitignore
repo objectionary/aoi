@@ -1,3 +1,4 @@
 object-inference.iml
 .idea
 target
+*TMP/

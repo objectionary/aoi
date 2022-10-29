@@ -1,11 +1,9 @@
 package org.objectionary.aoi.transformer
 
-import org.objectionary.ddr.graph.base
-import org.objectionary.ddr.graph.line
-import org.objectionary.ddr.graph.packageName
-import org.objectionary.ddr.graph.pos
+import org.objectionary.aoi.data.FreeAttribute
+import org.objectionary.aoi.data.FreeAttributesHolder
+import org.objectionary.ddr.graph.name
 import org.objectionary.ddr.graph.repr.Graph
-import org.objectionary.ddr.transform.XslTransformer
 import org.w3c.dom.Document
 import org.w3c.dom.Element
 import org.w3c.dom.Node
@@ -27,10 +25,49 @@ class XmirTransformer(
         documents.forEach { doc ->
             val program = doc.key.getElementsByTagName("program").item(0)
             val aoiChild: Element = doc.key.createElement("aoi")
-
+            addAoiChildren(aoiChild)
             program.appendChild(aoiChild)
         }
         transformDocuments()
+    }
+
+    private fun addAoiChildren(parent: Element) {
+        FreeAttributesHolder.storage
+            .filter { it.holderObject.ownerDocument == parent.ownerDocument }
+            .forEach { el ->
+                val obj = parent.ownerDocument.createElement("obj")
+                val fqn = getFqn(el.name, el.holderObject)
+                obj.setAttribute("fqn", fqn)
+                val inferred: Element = parent.ownerDocument.createElement("inferred")
+                graph.igNodes.filter { node ->
+                    if (node.name == null) return@filter false
+
+                    for (attr in el.appliedAttributes) {
+                        // @todo #14:30min differentiate not only by name but also by the number of parameters
+                        if (node.attributes.find { it.name == attr.name.substring(1) } == null) {
+                            return@filter false
+                        }
+                    }
+                    return@filter true
+                }.forEach {
+                    val element = parent.ownerDocument.createElement("obj")
+                    val name = getFqn(it.name!!, it.body.parentNode)
+                    element.setAttribute("fqn", name)
+                    inferred.appendChild(element)
+                }
+                obj.appendChild(inferred)
+                parent.appendChild(obj)
+            }
+    }
+
+    private fun getFqn(name: String, par: Node): String {
+        var fqn = name
+        var parent = par
+        while (name(parent) != null) {
+            fqn = "${name(parent)}.$fqn"
+            parent = parent.parentNode
+        }
+        return fqn
     }
 
     private fun transformDocuments() {

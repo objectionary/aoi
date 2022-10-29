@@ -34,8 +34,6 @@ open class UnitTestBase : TestBase {
         val innerPropagator = InnerPropagator(graph)
         innerPropagator.propagateInnerAttrs()
         testSteps(graph)
-        val t = XmirTransformer(graph, documents)
-        t.addAoiSection()
         val out = ByteArrayOutputStream()
         printAttributes(out)
         val actual = String(out.toByteArray())
@@ -43,13 +41,13 @@ open class UnitTestBase : TestBase {
         val expected = bufferedReader.use { it.readText() }
         logger.debug(actual)
         checkOutput(expected, actual)
-//        try {
-//            val tmpDir =
-//                Paths.get("${constructInPath(path).replace('/', sep).substringBeforeLast(sep)}${sep}TMP").toString()
-//            FileUtils.deleteDirectory(File(tmpDir))
-//        } catch (e: Exception) {
-//            logger.error(e.printStackTrace().toString())
-//        }
+        try {
+            val tmpDir =
+                Paths.get("${constructInPath(path).replace('/', sep).substringBeforeLast(sep)}${sep}TMP").toString()
+            FileUtils.deleteDirectory(File(tmpDir))
+        } catch (e: Exception) {
+            logger.error(e.printStackTrace().toString())
+        }
     }
 
     /**

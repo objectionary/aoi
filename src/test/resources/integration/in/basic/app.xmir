@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <program ms="152"
           name="app"
           source="/home/olesya/example/app.eo"
@@ -36,11 +36,7 @@
   so &gt; @
 </listing>
    <errors/>
-   <sheets>
-      <sheet>add-refs</sheet>
-      <sheet>expand-aliases</sheet>
-      <sheet>resolve-aliases</sheet>
-   </sheets>
+   <sheets/>
    <objects>
       <o abstract="" line="1" name="cat" pos="0">
          <o abstract="" line="2" name="talk" pos="2">
@@ -55,7 +51,7 @@
             <o base="QQ" line="6" pos="4"/>
             <o base=".io" line="6" method="" pos="6"/>
             <o base=".stdout" line="6" method="" name="@" pos="9">
-               <o base="dir" line="7" pos="6" ref="5"/>
+               <o base="dir" line="7" pos="6"/>
             </o>
          </o>
       </o>
@@ -72,7 +68,7 @@
             <o base="QQ" line="14" pos="4"/>
             <o base=".io" line="14" method="" pos="6"/>
             <o base=".stdout" line="14" method="" name="@" pos="9">
-               <o base="dir" line="15" pos="6" ref="13"/>
+               <o base="dir" line="15" pos="6"/>
             </o>
          </o>
          <o abstract="" line="16" name="smth" pos="2">
@@ -85,28 +81,25 @@
       </o>
       <o abstract="" line="20" name="some_object" pos="0">
          <o line="20" name="x" pos="1"/>
-         <o base="x" line="21" pos="2" ref="20"/>
+         <o base="x" line="21" pos="2"/>
          <o base=".talk" line="21" method="" name="heh" pos="3"/>
-         <o base="x" line="22" pos="2" ref="20"/>
+         <o base="x" line="22" pos="2"/>
          <o base=".move" line="22" method="" name="@" pos="3">
             <o base="string" data="string" line="22" pos="9">left</o>
          </o>
       </o>
       <o abstract="" line="24" name="other_object" pos="0">
          <o line="24" name="x" pos="1"/>
-         <o base="x" line="25" pos="2" ref="24"/>
+         <o base="x" line="25" pos="2"/>
          <o base=".talk" line="25" method="" name="@" pos="3"/>
-         <o base="x" line="26" pos="2" ref="24"/>
+         <o base="x" line="26" pos="2"/>
          <o base=".smth" line="26" method="" name="hih" pos="3"/>
       </o>
       <o abstract="" line="28" name="app" pos="0">
-         <o base="some_object" line="29" name="so" pos="2" ref="20">
-            <o base="dog" line="29" pos="14" ref="9"/>
+         <o base="some_object" line="29" name="so" pos="2">
+            <o base="dog" line="29" pos="14"/>
          </o>
-         <o base="so" line="30" name="@" pos="2" ref="29"/>
+         <o base="so" line="30" name="@" pos="2"/>
       </o>
    </objects>
-   <aoi>
-      <aoii/>
-   </aoi>
 </program>
