@@ -88,6 +88,7 @@
         <plugins>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
+
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <version>1.7.20</version>
                 <executions>
@@ -213,7 +214,7 @@
         <dependency>
             <groupId>org.eolang</groupId>
             <artifactId>ddr</artifactId>
-            <version>0.0.5</version>
+            <version>0.0.8</version>
         </dependency>
         <dependency>
             <groupId>xml-apis</groupId>

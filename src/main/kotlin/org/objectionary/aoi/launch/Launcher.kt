@@ -45,13 +45,10 @@ private val sep = File.separatorChar
  */
 fun launch(path: String) {
     documents.clear()
-    val graph = buildGraph(path, false)
+    val graph = buildGraph(path, false, "aoi")
     CondAttributesSetter(graph).processConditions()
-    val attributesSetter = AttributesSetter(graph)
-    attributesSetter.setDefaultAttributes()
-    attributesSetter.pushAttributes()
-    val innerPropagator = InnerPropagator(graph)
-    innerPropagator.propagateInnerAttrs()
+    AttributesSetter(graph).setAttributes()
+    InnerPropagator(graph).propagateInnerAttrs()
     InnerUsageProcessor(graph).processInnerUsages()
     InstanceUsageProcessor(graph).processInstanceUsages()
     val transformer = XmirTransformer(graph, documents)

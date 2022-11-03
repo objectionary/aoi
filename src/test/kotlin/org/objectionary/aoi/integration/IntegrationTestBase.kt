@@ -54,7 +54,7 @@ open class IntegrationTestBase : TestBase {
                 val actualBr: BufferedReader = File(file.toString()).bufferedReader()
                 val actual = actualBr.use { it.readText() }.replace(" ", "")
                 val expectedFile = actualFiles.find {
-                    it.replace("out$sep", "in$sep").replaceFirst(path, "${path}_ddr") == file.toString()
+                    it.replace("out$sep", "in$sep").replaceFirst(path, "${path}_aoi") == file.toString()
                 }
                 val expectedBr: BufferedReader = File(expectedFile.toString()).bufferedReader()
                 val expected = expectedBr.use { it.readText() }.replace(" ", "")
@@ -81,6 +81,6 @@ open class IntegrationTestBase : TestBase {
 
     private fun constructResultPath(directoryName: String): String =
         File(System.getProperty("user.dir")).resolve(
-            File("src${sep}test${sep}resources${sep}integration${sep}in$sep${directoryName}_ddr")
+            File("src${sep}test${sep}resources${sep}integration${sep}in$sep${directoryName}_aoi")
         ).absolutePath.replace("/", File.separator)
 }
