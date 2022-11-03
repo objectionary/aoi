@@ -30,6 +30,8 @@ import org.objectionary.aoi.launch.launch
 launch(${path_to_your_directory})
 ```
 
+`launch` method takes path to your directory as an input. After `launch` completes - a new directory
+with a name `$(path_to_your_directory}_aoi` will be created near your source directory, containing modified xmirs.
 
 ### Pipeline
 
