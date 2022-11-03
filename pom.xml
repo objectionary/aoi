@@ -198,6 +198,12 @@ SOFTWARE.
         </configuration>
       </plugin>
       <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.13</version>
+        <extensions>true</extensions>
+      </plugin>
+      <plugin>
         <groupId>org.cqfn.diktat</groupId>
         <artifactId>diktat-maven-plugin</artifactId>
         <version>${diktat-check.version}</version>
