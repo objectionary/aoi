@@ -21,12 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.objectionary.ddr;
 
 /**
- * Dummy class for javadoc generation.
+ * Dummy classes for javadoc creation.
  *
  * @since 1.0
  */
-public class Dummy {
-}
+package org.objectionary.aoi;
