@@ -10,6 +10,27 @@
 
 AOI is a project aiming at performing Abstract Object Inference for [EO](https://www.eolang.org) Programs.
 
+### Launch
+
+#### Using Maven
+Just add this to your `pom.xml`
+
+```
+<dependency>
+  <groupId>org.eolang</groupId>
+  <artifactId>aoi</artifactId>
+  <version>0.0.2</version>
+</dependency>
+```
+
+And then you will be able to use the tool like this:
+```
+import org.objectionary.aoi.launch.launch
+...
+launch(${path_to_your_directory})
+```
+
+
 ### Pipeline
 
 The tool receives a path to the directory with .xmir files as an input.  
