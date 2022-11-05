@@ -58,8 +58,8 @@ class InnerUsageProcessor(private val graph: Graph) {
                     continue
                 }
                 deepTraversal(ch, origNode)
-                if (base(ch) == null && name(ch) != null && abstract(ch) == null
-                    && (line(ch) == line(node) || line(ch)?.toInt() == line(node)?.toInt()?.plus(1))
+                if (base(ch) == null && name(ch) != null && abstract(ch) == null &&
+                        (line(ch) == line(node) || line(ch)?.toInt() == line(node)?.toInt()?.plus(1))
                 ) {
                     FreeAttributesHolder.storage.add(FreeAttribute(name(ch)!!, origNode))
                 }
