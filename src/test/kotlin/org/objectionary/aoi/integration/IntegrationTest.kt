@@ -29,4 +29,7 @@ import org.junit.jupiter.api.Test
 class IntegrationTest : IntegrationTestBase() {
     @Test
     fun `test basic`() = doTest()
+
+    @Test
+    fun `test bool`() = doTest()
 }

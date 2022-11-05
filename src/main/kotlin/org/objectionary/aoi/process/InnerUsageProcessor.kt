@@ -27,10 +27,12 @@ package org.objectionary.aoi.process
 import org.objectionary.aoi.data.FreeAttribute
 import org.objectionary.aoi.data.FreeAttributesHolder
 import org.objectionary.aoi.data.Parameter
+import org.objectionary.ddr.graph.abstract
 import org.objectionary.ddr.graph.base
 import org.objectionary.ddr.graph.line
 import org.objectionary.ddr.graph.name
 import org.objectionary.ddr.graph.repr.Graph
+import org.w3c.dom.Node
 
 /**
  * Processes usages of free attributes that occur inside the parent object body
@@ -41,15 +43,28 @@ class InnerUsageProcessor(private val graph: Graph) {
      */
     fun processInnerUsages() {
         graph.igNodes.forEach { obj ->
-            val xmirNode = obj.body
-            val children = xmirNode.childNodes
-            for (i in 0..children.length) {
+            deepTraversal(obj.body, obj.body)
+        }
+    }
+
+    private fun deepTraversal(node: Node, origNode: Node) {
+        if (node.childNodes.length == 0 || (graph.igNodes.find { it.body == node } != null && graph.igNodes.find { it.body == node }?.body != origNode)) {
+            return
+        } else {
+            val children = node.childNodes
+            for (i in 0 until children.length) {
                 val ch = children.item(i)
-                if (base(ch) == null && name(ch) != null && line(ch) == line(xmirNode)) {
-                    FreeAttributesHolder.storage.add(FreeAttribute(name(ch)!!, xmirNode))
+                if (ch.attributes == null || ch.attributes.length == 0) {
+                    continue
+                }
+                deepTraversal(ch, origNode)
+                if (base(ch) == null && name(ch) != null && abstract(ch) == null
+                    && (line(ch) == line(node) || line(ch)?.toInt() == line(node)?.toInt()?.plus(1))
+                ) {
+                    FreeAttributesHolder.storage.add(FreeAttribute(name(ch)!!, origNode))
                 }
                 base(ch)?.let {
-                    FreeAttributesHolder.storage.find { it.name == base(ch) && it.holderObject == xmirNode }
+                    FreeAttributesHolder.storage.find { it.name == base(ch) && it.holderObject == origNode }
                         ?.let { fa ->
                             base(ch.nextSibling.nextSibling)?.let {
                                 fa.appliedAttributes.add(Parameter(it))

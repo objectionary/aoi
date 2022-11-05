@@ -68,13 +68,14 @@ class InstanceUsageProcessor(private val graph: Graph) {
     private fun isParameter(node: Node, param: String?): Boolean {
         val children = node.childNodes
         for (i in 0..children.length) {
-            val ch = children.item(i)
-            if ((line(ch) != null && name(ch) != null && base(ch) == null) || ch.attributes == null) {
-                if (name(ch) == param) {
-                    return true
+            children.item(i)?.let {ch ->
+                if ((line(ch) != null && name(ch) != null && base(ch) == null) || ch.attributes == null) {
+                    if (name(ch) == param) {
+                        return true
+                    }
+                } else {
+                    return false
                 }
-            } else {
-                return false
             }
         }
         return false
