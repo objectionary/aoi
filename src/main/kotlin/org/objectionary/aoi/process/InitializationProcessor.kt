@@ -48,7 +48,7 @@ class InitializationProcessor(private val graph: Graph) {
                     val param = FreeAttributesHolder.storage.find { it.name == name(abstract.childNodes.item(i)) && it.holderObject == abstract } ?: continue
                     val ref = findRef(ch, graph.initialObjects, graph) ?: continue
                     val dgAbstract = graph.igNodes.find { it.body == ref } ?: continue
-                    dgAbstract.attributes.forEach { param.appliedAttributes.add(Parameter(it.name)) }
+                    dgAbstract.attributes.forEach { param.appliedAttributes.add(Parameter(".${it.name}")) }
                 }
             }
         }

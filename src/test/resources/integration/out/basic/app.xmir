@@ -137,7 +137,6 @@
       </obj>
       <obj fqn="some_object.x">
          <inferred>
-            <obj fqn="cat"/>
             <obj fqn="dog"/>
          </inferred>
       </obj>
