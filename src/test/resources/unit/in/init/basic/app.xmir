@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<program ms="150"
+         name="app"
+         source="C:\Users\lesya\eo-test\app.eo"
+         time="2022-11-08T09:46:05.253716800Z"
+         version="0.28.10">
+   <listing>[x_c] &gt; cat
+      [] &gt; meow
+      QQ.io.stdout x_c &gt; @
+
+      [x y] &gt; dog
+      [] &gt; woof
+      QQ.io.stdout "wooof" &gt; @
+
+      [] &gt; smth
+      [] &gt; something
+
+      [] &gt; app
+      cat 5 &gt; xx
+      dog xx smth &gt; dg
+      dog.woof &gt; @
+   </listing>
+   <errors/>
+   <sheets/>
+   <objects>
+      <o abstract="" line="1" name="cat" pos="0">
+         <o line="1" name="x_c" pos="1"/>
+         <o abstract="" line="2" name="meow" pos="2">
+            <o base="QQ" line="3" pos="4"/>
+            <o base=".io" line="3" method="" pos="6"/>
+            <o base=".stdout" line="3" method="" name="@" pos="9">
+               <o base="x_c" line="3" pos="17"/>
+            </o>
+         </o>
+      </o>
+      <o abstract="" line="5" name="dog" pos="0">
+         <o line="5" name="x" pos="1"/>
+         <o line="5" name="y" pos="3"/>
+         <o abstract="" line="6" name="woof" pos="2">
+            <o base="QQ" line="7" pos="4"/>
+            <o base=".io" line="7" method="" pos="6"/>
+            <o base=".stdout" line="7" method="" name="@" pos="9">
+               <o base="string" data="string" line="7" pos="17">wooof</o>
+            </o>
+         </o>
+      </o>
+      <o abstract="" line="9" name="smth" pos="0">
+         <o abstract="" line="10" name="something" pos="2"/>
+      </o>
+      <o abstract="" line="12" name="app" pos="0">
+         <o base="cat" line="13" name="xx" pos="2">
+            <o base="int" data="bytes" line="13" pos="6">00 00 00 00 00 00 00 05</o>
+         </o>
+         <o base="dog" line="14" name="dg" pos="2">
+            <o base="xx" line="14" pos="6"/>
+            <o base="smth" line="14" pos="9"/>
+         </o>
+         <o base="dog" line="15" pos="2"/>
+         <o base=".woof" line="15" method="" name="@" pos="5"/>
+      </o>
+   </objects>
+</program>

@@ -22,37 +22,32 @@
  * SOFTWARE.
  */
 
-package org.objectionary.aoi.launch
+package org.objectionary.aoi.unit.init
 
 import org.objectionary.aoi.process.InitializationProcessor
 import org.objectionary.aoi.process.InnerUsageProcessor
 import org.objectionary.aoi.process.InstanceUsageProcessor
-import org.objectionary.aoi.transformer.XmirTransformer
-import org.objectionary.ddr.graph.AttributesSetter
-import org.objectionary.ddr.graph.CondAttributesSetter
-import org.objectionary.ddr.graph.InnerPropagator
-import org.objectionary.ddr.launch.buildGraph
-import org.objectionary.ddr.launch.documents
-import org.slf4j.LoggerFactory
+import org.objectionary.aoi.unit.UnitTestBase
+import org.objectionary.ddr.graph.repr.Graph
 import java.io.File
 
-private val logger = LoggerFactory.getLogger("org.objectionary.oi.launch.Launcher")
-private val sep = File.separatorChar
-
 /**
- * Aggregates the whole pipeline.
- *
- * @param path to input directory
+ * Base class for graph builder testing
  */
-fun launch(path: String) {
-    documents.clear()
-    val graph = buildGraph(path, false, "aoi")
-    CondAttributesSetter(graph).processConditions()
-    AttributesSetter(graph).setAttributes()
-    InnerPropagator(graph).propagateInnerAttrs()
-    InnerUsageProcessor(graph).processInnerUsages()
-    InstanceUsageProcessor(graph).processInstanceUsages()
-    InitializationProcessor(graph).processInitializations()
-    val transformer = XmirTransformer(graph, documents)
-    transformer.addAoiSection()
+open class InitBase : UnitTestBase() {
+    override fun testSteps(graph: Graph) {
+        InnerUsageProcessor(graph).processInnerUsages()
+        InstanceUsageProcessor(graph).processInstanceUsages()
+        InitializationProcessor(graph).processInitializations()
+    }
+
+    override fun constructOutPath(directoryName: String): String =
+        File(System.getProperty("user.dir")).resolve(
+            File("src${sep}test${sep}resources${sep}unit${sep}out${sep}init$sep$directoryName.txt")
+        ).absolutePath.replace("/", File.separator)
+
+    override fun constructInPath(directoryName: String): String =
+        File(System.getProperty("user.dir")).resolve(
+            File("src${sep}test${sep}resources${sep}unit${sep}in${sep}init$sep$directoryName")
+        ).absolutePath.replace("/", File.separator)
 }
