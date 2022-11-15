@@ -54,7 +54,6 @@ fun launch(path: String) {
     InnerPropagator(graph).propagateInnerAttrs()
     InnerUsageProcessor(graph).processInnerUsages()
     InstanceUsageProcessor(graph).processInstanceUsages()
-    InitializationProcessor(graph).processInitializations()
     val transformer = XmirTransformer(graph, documents)
     transformer.addAoiSection()
 }

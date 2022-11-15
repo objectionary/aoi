@@ -64,6 +64,7 @@ class XmirTransformer(
     private fun addAoiChildren(parent: Element) {
         FreeAttributesHolder.storage
             .filter { it.holderObject.ownerDocument == parent.ownerDocument }
+            .filter { it.appliedAttributes.size > 0 }
             .forEach { el ->
                 val obj = parent.ownerDocument.createElement("obj")
                 val fqn = getFqn(el.name, el.holderObject)
