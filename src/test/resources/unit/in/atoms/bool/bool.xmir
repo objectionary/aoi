@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<program ms="6"
+          name="org.eolang.bool"
+          source="C:\Users\lesya\eo\eo-maven-plugin\target\it\fibonacci\target\eo\04-pull\org\eolang\bool.eo"
+          time="2022-11-02T08:43:25.882292600Z"
+          version="1.0-SNAPSHOT">
+   <listing># The MIT License (MIT)
+#
+# Copyright (c) 2016-2022 Objectionary.com
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included
+# in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
++architect yegor256@gmail.com
++home https://github.com/objectionary/eo
++package org.eolang
++rt jvm org.eolang:eo-runtime:0.28.10
++version 0.28.10
+
+[] &gt; bool
+  # Equal to another object?
+  [x] &gt; eq
+    eq. &gt; @
+      ^.as-bytes
+      x.as-bytes
+
+  # If true, return "t", otherwise "f"
+  [t f] &gt; if /t
+
+  # NOT
+  [] &gt; not
+    eq. &gt; @
+      ^
+      FALSE
+
+  # AND
+  [x...] &gt; and /bool
+
+  # OR
+  [x...] &gt; or /bool
+
+  # While this is true copies the object
+  # with "i" as the position of the cycle. The result
+  # of WHILE is the last dataized object or FALSE if
+  # ^ condition was never TRUE. The \rho of the object
+  # copied will be set to "while.\rho".
+  [f] &gt; while /int
+
+  # Converts this to bytes
+  [] &gt; as-bytes
+    if. &gt; @
+      ^
+      01-
+      00-
+
+  # Converts this to hash
+  [] &gt; as-hash
+    if. &gt; @
+      ^
+      1231
+      1237
+</listing>
+   <errors/>
+   <sheets>
+      <sheet>add-refs</sheet>
+      <sheet>expand-aliases</sheet>
+      <sheet>resolve-aliases</sheet>
+   </sheets>
+   <license>The MIT License (MIT)
+
+Copyright (c) 2016-2022 Objectionary.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</license>
+   <metas>
+      <meta line="23">
+         <head>architect</head>
+         <tail>yegor256@gmail.com</tail>
+         <part>yegor256@gmail.com</part>
+      </meta>
+      <meta line="24">
+         <head>home</head>
+         <tail>https://github.com/objectionary/eo</tail>
+         <part>https://github.com/objectionary/eo</part>
+      </meta>
+      <meta line="25">
+         <head>package</head>
+         <tail>org.eolang</tail>
+         <part>org.eolang</part>
+      </meta>
+      <meta line="26">
+         <head>rt</head>
+         <tail>jvm org.eolang:eo-runtime:0.28.10</tail>
+         <part>jvm</part>
+         <part>org.eolang:eo-runtime:0.28.10</part>
+      </meta>
+      <meta line="27">
+         <head>version</head>
+         <tail>0.28.10</tail>
+         <part>0.28.10</part>
+      </meta>
+   </metas>
+   <objects>
+      <o abstract="" line="29" name="bool" pos="0">
+         <o abstract="" line="30" name="eq" pos="2">
+            <o line="31" name="x" pos="3"/>
+            <o base=".eq" line="32" name="@" pos="4">
+               <o base="^" line="33" pos="6"/>
+               <o base=".as-bytes" line="33" method="" pos="7"/>
+               <o base="x" line="34" pos="6" ref="31"/>
+               <o base=".as-bytes" line="34" method="" pos="7"/>
+            </o>
+         </o>
+         <o abstract="" atom="t" line="36" name="if" pos="2">
+            <o line="37" name="t" pos="3"/>
+            <o line="37" name="f" pos="5"/>
+         </o>
+         <o abstract="" line="39" name="not" pos="2">
+            <o base=".eq" line="41" name="@" pos="4">
+               <o base="^" line="42" pos="6"/>
+               <o base="bool" data="bytes" line="43" pos="6" ref="29">00</o>
+            </o>
+         </o>
+         <o abstract="" atom="bool" line="45" name="and" pos="2">
+            <o line="46" name="x" pos="3" vararg=""/>
+         </o>
+         <o abstract="" atom="bool" line="48" name="or" pos="2">
+            <o line="49" name="x" pos="3" vararg=""/>
+         </o>
+         <o abstract="" atom="int" line="51" name="while" pos="2">
+            <o line="56" name="f" pos="3"/>
+         </o>
+         <o abstract="" line="58" name="as-bytes" pos="2">
+            <o base=".if" line="60" name="@" pos="4">
+               <o base="^" line="61" pos="6"/>
+               <o base="bytes" data="bytes" line="62" pos="6">01</o>
+               <o base="bytes" data="bytes" line="63" pos="6">00</o>
+            </o>
+         </o>
+         <o abstract="" line="65" name="as-hash" pos="2">
+            <o base=".if" line="67" name="@" pos="4">
+               <o base="^" line="68" pos="6"/>
+               <o base="int" data="bytes" line="69" pos="6">00 00 00 00 00 00 04 CF</o>
+               <o base="int" data="bytes" line="70" pos="6">00 00 00 00 00 00 04 D5</o>
+            </o>
+         </o>
+      </o>
+   </objects>
+   <aoi/>
+</program>

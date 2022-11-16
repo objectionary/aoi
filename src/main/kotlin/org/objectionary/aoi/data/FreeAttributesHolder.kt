@@ -50,6 +50,25 @@ data class FreeAttribute(val name: String, val holderObject: Node) {
 }
 
 /**
+ * Representation of a free attribute which is defined by its atom
+ *
+ * @property name attribute name
+ * @property holderObject parent object body
+ */
+data class FreeAtomAttribute(val name: String, val holderObject: Node) {
+    /**
+     * Set of the attributes of this free attribute that were applied in the program
+     * I don't think we'll need it though, todo discuss
+     */
+    val appliedAttributes: MutableSet<Parameter> = mutableSetOf()
+
+    /**
+     * Set of restrictions derived from atom semantics
+     */
+    val atomRestrictions: MutableSet<String> = mutableSetOf()
+}
+
+/**
  * Attribute representation.
  *
  * @property name attribute name
