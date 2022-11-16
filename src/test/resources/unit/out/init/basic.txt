@@ -1,5 +1,5 @@
 ATTR: x_c
 ATTR: x
-meow
+.meow
 ATTR: y
-something
+.something
