@@ -2,3 +2,4 @@ object-inference.iml
 .idea
 target
 *TMP/
+*_aoi

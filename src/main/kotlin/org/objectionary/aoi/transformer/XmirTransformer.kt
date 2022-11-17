@@ -24,6 +24,7 @@
 
 package org.objectionary.aoi.transformer
 
+import org.objectionary.aoi.data.FreeAtomAttribute
 import org.objectionary.aoi.data.FreeAttributesHolder
 import org.objectionary.ddr.graph.name
 import org.objectionary.ddr.graph.repr.Graph
@@ -64,6 +65,8 @@ class XmirTransformer(
     private fun addAoiChildren(parent: Element) {
         FreeAttributesHolder.storage
             .filter { it.holderObject.ownerDocument == parent.ownerDocument }
+            .filter { it.appliedAttributes.size > 0 }
+            .filter { it !is FreeAtomAttribute }
             .forEach { el ->
                 val obj = parent.ownerDocument.createElement("obj")
                 val fqn = getFqn(el.name, el.holderObject)
@@ -82,6 +85,24 @@ class XmirTransformer(
                     element.setAttribute("fqn", name)
                     inferred.appendChild(element)
                 }
+                obj.appendChild(inferred)
+                parent.appendChild(obj)
+            }
+        FreeAttributesHolder.storage
+            .filter { it.holderObject.ownerDocument == parent.ownerDocument }
+            .filterIsInstance<FreeAtomAttribute>()
+            .filter { it.atomRestrictions.size > 0 }
+            .forEach { el ->
+                val obj = parent.ownerDocument.createElement("obj")
+                val fqn = getFqn(el.name, el.holderObject)
+                obj.setAttribute("fqn", fqn)
+                val inferred: Element = parent.ownerDocument.createElement("inferred")
+                el.atomRestrictions
+                    .forEach {
+                        val element = parent.ownerDocument.createElement("obj")
+                        element.setAttribute("fqn", it)
+                        inferred.appendChild(element)
+                    }
                 obj.appendChild(inferred)
                 parent.appendChild(obj)
             }

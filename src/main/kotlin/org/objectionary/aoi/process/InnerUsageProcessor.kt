@@ -61,7 +61,8 @@ class InnerUsageProcessor(private val graph: Graph) {
                 if (base(ch) == null && name(ch) != null && abstract(ch) == null &&
                         (line(ch) == line(node) || line(ch)?.toInt() == line(node)?.toInt()?.plus(1))
                 ) {
-                    FreeAttributesHolder.storage.add(FreeAttribute(name(ch)!!, origNode))
+                    FreeAttributesHolder.storage.find { it.name == name(ch)!! && it.holderObject == origNode }
+                        ?: FreeAttributesHolder.storage.add(FreeAttribute(name(ch)!!, origNode))
                 }
                 base(ch)?.let {
                     FreeAttributesHolder.storage.find { it.name == base(ch) && it.holderObject == origNode }

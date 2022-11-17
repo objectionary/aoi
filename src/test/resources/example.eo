@@ -1,0 +1,26 @@
+cat
+  [] > talk
+    QQ.io.stdout > @
+      "Meow!"
+  [dir] > move
+    QQ.io.stdout > @
+      dir
+
+[] > dog
+  [] > talk
+    QQ.io.stdout > @
+      "Woof!"
+  [dir] > move
+    QQ.io.stdout > @
+      dir
+  [] > smth
+    QQ.io.stdout > @
+      "smth"
+
+[x] > some_object
+  x.talk > t
+  x.move "left" > @
+
+[] > app
+  some_object dog > so
+  so > @

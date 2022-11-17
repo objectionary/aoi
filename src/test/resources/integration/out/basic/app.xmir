@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <program ms="152"
-          name="app"
-          source="/home/olesya/example/app.eo"
-          time="2022-10-19T09:33:18.115156299Z"
-          version="0.28.10">
+         name="app"
+         source="/home/olesya/example/app.eo"
+         time="2022-10-19T09:33:18.115156299Z"
+         version="0.28.10">
    <listing>[] &gt; cat
-  [] &gt; talk
-    QQ.io.stdout &gt; @
+      [] &gt; talk
+      QQ.io.stdout &gt; @
       "Meow!"
-  [dir] &gt; move
-    QQ.io.stdout &gt; @
+      [dir] &gt; move
+      QQ.io.stdout &gt; @
       dir
 
-[] &gt; dog
-  [] &gt; talk
-    QQ.io.stdout &gt; @
+      [] &gt; dog
+      [] &gt; talk
+      QQ.io.stdout &gt; @
       "Woof!"
-  [dir] &gt; move
-    QQ.io.stdout &gt; @
+      [dir] &gt; move
+      QQ.io.stdout &gt; @
       dir
-  [] &gt; smth
-    QQ.io.stdout &gt; @
+      [] &gt; smth
+      QQ.io.stdout &gt; @
       "smth"
 
-[x] &gt; some_object
-  x.talk &gt; heh
-  x.move "left" &gt; @
+      [x] &gt; some_object
+      x.talk &gt; heh
+      x.move "left" &gt; @
 
-[x] &gt; other_object
-  x.talk &gt; @
-  x.smth &gt; hih
+      [x] &gt; other_object
+      x.talk &gt; @
+      x.smth &gt; hih
 
-[] &gt; app
-  some_object dog &gt; so
-  so &gt; @
-</listing>
+      [] &gt; app
+      some_object dog &gt; so
+      so &gt; @
+   </listing>
    <errors/>
    <sheets>
       <sheet>add-refs</sheet>
@@ -107,34 +107,6 @@
       </o>
    </objects>
    <aoi>
-      <obj fqn="cat.move.dir">
-         <inferred>
-            <obj fqn="cat"/>
-            <obj fqn="cat.talk"/>
-            <obj fqn="cat.move"/>
-            <obj fqn="dog"/>
-            <obj fqn="dog.talk"/>
-            <obj fqn="dog.move"/>
-            <obj fqn="dog.smth"/>
-            <obj fqn="some_object"/>
-            <obj fqn="other_object"/>
-            <obj fqn="app"/>
-         </inferred>
-      </obj>
-      <obj fqn="dog.move.dir">
-         <inferred>
-            <obj fqn="cat"/>
-            <obj fqn="cat.talk"/>
-            <obj fqn="cat.move"/>
-            <obj fqn="dog"/>
-            <obj fqn="dog.talk"/>
-            <obj fqn="dog.move"/>
-            <obj fqn="dog.smth"/>
-            <obj fqn="some_object"/>
-            <obj fqn="other_object"/>
-            <obj fqn="app"/>
-         </inferred>
-      </obj>
       <obj fqn="some_object.x">
          <inferred>
             <obj fqn="cat"/>

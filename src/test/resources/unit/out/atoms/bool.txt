@@ -1,0 +1,6 @@
+ATTR (atom): _and.x_
+ATTR (atom): _or.x_
+ATTR (not atom): _eq.x_
+.as-bytes
+ATTR (not atom): _if.t_
+ATTR (not atom): _if.f_

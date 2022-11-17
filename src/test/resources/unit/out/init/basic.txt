@@ -1,0 +1,5 @@
+ATTR: x_c
+ATTR: x
+.meow
+ATTR: y
+.something

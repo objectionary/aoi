@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
 The MIT License (MIT)
 
@@ -22,33 +22,23 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
-<program ms="249" name="ex-1" time="2022-08-17T06:45:04.449934Z" version="1.0-SNAPSHOT">
-  <listing>+package org.ut
-
-    [] &gt; util
-    [] &gt; doUtil
-    QQ.io.stdout &gt; @
-    "util"
-  </listing>
-  <errors/>
-  <sheets/>
-  <metas>
-    <meta line="1">
-      <head>package</head>
-      <tail>org.ut</tail>
-      <part>org.ut</part>
-    </meta>
-  </metas>
-  <objects>
-    <o abstract="" line="3" name="util" pos="0">
-      <o abstract="" line="4" name="doUtil" pos="2">
-        <o base="QQ" line="5" pos="4"/>
-        <o base=".io" line="5" method="" pos="6"/>
-        <o base=".stdout" line="5" method="" name="@" pos="9">
-          <o base="string" data="string" line="6" pos="6">util</o>
-        </o>
-      </o>
-    </o>
-  </objects>
-</program>
-
+<list>
+  <atom>
+    <name>bool.and</name>
+    <objects>
+      <o name="bool"/>
+    </objects>
+  </atom>
+  <atom>
+    <name>bool.or</name>
+    <objects>
+      <o name="bool"/>
+    </objects>
+  </atom>
+  <atom>
+    <name>bool.if</name>
+    <objects>
+      <o name="bool"/>
+    </objects>
+  </atom>
+</list>
