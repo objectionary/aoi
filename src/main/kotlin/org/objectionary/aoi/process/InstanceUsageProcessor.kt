@@ -50,9 +50,9 @@ class InstanceUsageProcessor(private val graph: Graph) {
                 if (igAbstract != null && isParameter(parentAbstract, base(obj)?.removePrefix("."))) {
                     val application = obj.nextSibling.nextSibling
                     if (base(application)?.startsWith(".") == true &&
-                        FreeAttributesHolder.storage.find {
-                            it.name == base(obj)!!.removePrefix(".") && it.holderObject == parentAbstract
-                        } == null
+                            FreeAttributesHolder.storage.find {
+                                it.name == base(obj)!!.removePrefix(".") && it.holderObject == parentAbstract
+                            } == null
                     ) {
                         FreeAttributesHolder.storage.add(
                             FreeAttribute(

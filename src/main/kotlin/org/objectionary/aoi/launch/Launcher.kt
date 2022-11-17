@@ -26,7 +26,6 @@ package org.objectionary.aoi.launch
 
 import org.objectionary.aoi.data.FreeAttributesHolder
 import org.objectionary.aoi.process.AtomsProcessor
-import org.objectionary.aoi.process.InitializationProcessor
 import org.objectionary.aoi.process.InnerUsageProcessor
 import org.objectionary.aoi.process.InstanceUsageProcessor
 import org.objectionary.aoi.transformer.XmirTransformer

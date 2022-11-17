@@ -98,11 +98,11 @@ class XmirTransformer(
                 obj.setAttribute("fqn", fqn)
                 val inferred: Element = parent.ownerDocument.createElement("inferred")
                 el.atomRestrictions
-                .forEach {
-                    val element = parent.ownerDocument.createElement("obj")
-                    element.setAttribute("fqn", it)
-                    inferred.appendChild(element)
-                }
+                    .forEach {
+                        val element = parent.ownerDocument.createElement("obj")
+                        element.setAttribute("fqn", it)
+                        inferred.appendChild(element)
+                    }
                 obj.appendChild(inferred)
                 parent.appendChild(obj)
             }

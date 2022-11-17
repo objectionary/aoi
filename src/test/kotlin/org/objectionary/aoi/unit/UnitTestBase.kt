@@ -78,6 +78,11 @@ open class UnitTestBase : TestBase {
     @Suppress("EMPTY_BLOCK_STRUCTURE_ERROR")
     open fun testSteps(graph: Graph) {}
 
+    /**
+     * Prints attributes to output stream
+     *
+     * @param out output stream
+     */
     protected open fun printAttributes(out: ByteArrayOutputStream) {
         FreeAttributesHolder.storage.forEach { attr ->
             out.writeBytes("ATTR: ${attr.name}".toByteArray())

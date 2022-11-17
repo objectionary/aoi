@@ -11,19 +11,22 @@ import org.slf4j.LoggerFactory
 import org.w3c.dom.Document
 import javax.xml.parsers.DocumentBuilderFactory
 
+/**
+ * Class for processing atoms and their restrictions
+ */
 class AtomsProcessor(private val graph: Graph) {
-
     private val logger = LoggerFactory.getLogger(this.javaClass)
 
     /**
      * Processes atoms and their restrictions
      */
+    @Suppress("MAGIC_NUMBER")
     fun processAtoms() {
         graph.initialObjects.forEach { obj ->
             obj.attributes?.getNamedItem("atom")?.textContent?.let { atom ->
-                name(obj)?.let {name ->
+                name(obj)?.let { name ->
                     val docObjects = getAtomsDocument()?.getElementsByTagName("atom") ?: return@forEach
-                    val fqn = "${atom}.$name"
+                    val fqn = "$atom.$name"
                     for (i in 0 until docObjects.length) {
                         val atomNode = docObjects.item(i)
                         val atomName = atomNode.childNodes.item(1).textContent
@@ -35,13 +38,13 @@ class AtomsProcessor(private val graph: Graph) {
                                     continue
                                 }
                                 if (base(ch) == null && name(ch) != null && abstract(ch) == null &&
-                                    (line(ch) == line(obj) || line(ch)?.toInt() == line(obj)?.toInt()?.plus(1))
+                                        (line(ch) == line(obj) || line(ch)?.toInt() == line(obj)?.toInt()?.plus(1))
                                 ) {
                                     val freeAtomAttr = FreeAtomAttribute(name(ch)!!, obj)
                                     val objects = atomNode.childNodes.item(3).childNodes
                                     for (k in 0 until objects.length) {
-                                        val oNode = objects.item(k)
-                                        name(oNode)?.let { freeAtomAttr.atomRestrictions.add(it) }
+                                        val objNode = objects.item(k)
+                                        name(objNode)?.let { freeAtomAttr.atomRestrictions.add(it) }
                                     }
                                     FreeAttributesHolder.storage.add(freeAtomAttr)
                                 }
