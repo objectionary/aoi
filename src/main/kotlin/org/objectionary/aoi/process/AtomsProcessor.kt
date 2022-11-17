@@ -26,7 +26,7 @@ class AtomsProcessor(private val graph: Graph) {
                     val fqn = "${atom}.$name"
                     for (i in 0 until docObjects.length) {
                         val atomNode = docObjects.item(i)
-                        val atomName = atomNode.childNodes.item(0).nodeName
+                        val atomName = atomNode.childNodes.item(1).textContent
                         if (fqn == atomName) {
                             val children = obj.childNodes ?: return@forEach
                             for (j in 0 until children.length) {
@@ -38,7 +38,7 @@ class AtomsProcessor(private val graph: Graph) {
                                     (line(ch) == line(obj) || line(ch)?.toInt() == line(obj)?.toInt()?.plus(1))
                                 ) {
                                     val freeAtomAttr = FreeAtomAttribute(name(ch)!!, obj)
-                                    val objects = atomNode.childNodes.item(1).childNodes
+                                    val objects = atomNode.childNodes.item(3).childNodes
                                     for (k in 0 until objects.length) {
                                         val oNode = objects.item(k)
                                         name(oNode)?.let { freeAtomAttr.atomRestrictions.add(it) }

@@ -49,7 +49,11 @@ class InstanceUsageProcessor(private val graph: Graph) {
                 val igAbstract = graph.igNodes.find { it.name == name(parentAbstract) && it.body == parentAbstract }
                 if (igAbstract != null && isParameter(parentAbstract, base(obj)?.removePrefix("."))) {
                     val application = obj.nextSibling.nextSibling
-                    if (base(application)?.startsWith(".") == true) {
+                    if (base(application)?.startsWith(".") == true &&
+                        FreeAttributesHolder.storage.find {
+                            it.name == base(obj)!!.removePrefix(".") && it.holderObject == parentAbstract
+                        } == null
+                    ) {
                         FreeAttributesHolder.storage.add(
                             FreeAttribute(
                                 base(obj)!!.removePrefix("."),
@@ -68,7 +72,7 @@ class InstanceUsageProcessor(private val graph: Graph) {
     private fun isParameter(node: Node, param: String?): Boolean {
         val children = node.childNodes
         for (i in 0..children.length) {
-            children.item(i)?.let {ch ->
+            children.item(i)?.let { ch ->
                 if ((line(ch) != null && name(ch) != null && base(ch) == null) || ch.attributes == null) {
                     if (name(ch) == param) {
                         return true

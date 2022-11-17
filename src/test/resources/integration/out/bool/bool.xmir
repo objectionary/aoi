@@ -186,5 +186,15 @@
             <obj fqn="bool"/>
          </inferred>
       </obj>
+      <obj fqn="bool.and.x">
+         <inferred>
+            <obj fqn="bool"/>
+         </inferred>
+      </obj>
+      <obj fqn="bool.or.x">
+         <inferred>
+            <obj fqn="bool"/>
+         </inferred>
+      </obj>
    </aoi>
 </program>

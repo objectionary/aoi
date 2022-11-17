@@ -97,17 +97,10 @@ class XmirTransformer(
                 val fqn = getFqn(el.name, el.holderObject)
                 obj.setAttribute("fqn", fqn)
                 val inferred: Element = parent.ownerDocument.createElement("inferred")
-                graph.igNodes.filter { node ->
-                    node.name ?: return@filter false
-                    for (attr in el.atomRestrictions) {
-                        // @todo #14:30min differentiate not only by name but also by the number of parameters
-                        node.attributes.find { it.name == attr } ?: return@filter false
-                    }
-                    return@filter true
-                }.forEach {
+                el.atomRestrictions
+                .forEach {
                     val element = parent.ownerDocument.createElement("obj")
-                    val name = getFqn(it.name!!, it.body.parentNode)
-                    element.setAttribute("fqn", name)
+                    element.setAttribute("fqn", it)
                     inferred.appendChild(element)
                 }
                 obj.appendChild(inferred)
