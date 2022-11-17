@@ -16,7 +16,7 @@ class AtomsProcessor(private val graph: Graph) {
     private val logger = LoggerFactory.getLogger(this.javaClass)
 
     /**
-     * Processes atoms
+     * Processes atoms and their restrictions
      */
     fun processAtoms() {
         graph.initialObjects.forEach { obj ->
@@ -53,10 +53,6 @@ class AtomsProcessor(private val graph: Graph) {
         }
     }
 
-    /**
-     * @param filename source xml filename
-     * @return generated Document
-     */
     private fun getAtomsDocument(): Document? {
         val inputStream = this.javaClass.getResourceAsStream("atoms_desc.xml")
         try {

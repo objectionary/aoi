@@ -24,6 +24,7 @@
 
 package org.objectionary.aoi.transformer
 
+import org.objectionary.aoi.data.FreeAtomAttribute
 import org.objectionary.aoi.data.FreeAttributesHolder
 import org.objectionary.ddr.graph.name
 import org.objectionary.ddr.graph.repr.Graph
@@ -65,6 +66,7 @@ class XmirTransformer(
         FreeAttributesHolder.storage
             .filter { it.holderObject.ownerDocument == parent.ownerDocument }
             .filter { it.appliedAttributes.size > 0 }
+            .filter { it !is FreeAtomAttribute }
             .forEach { el ->
                 val obj = parent.ownerDocument.createElement("obj")
                 val fqn = getFqn(el.name, el.holderObject)
@@ -75,6 +77,31 @@ class XmirTransformer(
                     for (attr in el.appliedAttributes) {
                         // @todo #14:30min differentiate not only by name but also by the number of parameters
                         node.attributes.find { it.name == attr.name.substring(1) } ?: return@filter false
+                    }
+                    return@filter true
+                }.forEach {
+                    val element = parent.ownerDocument.createElement("obj")
+                    val name = getFqn(it.name!!, it.body.parentNode)
+                    element.setAttribute("fqn", name)
+                    inferred.appendChild(element)
+                }
+                obj.appendChild(inferred)
+                parent.appendChild(obj)
+            }
+        FreeAttributesHolder.storage
+            .filter { it.holderObject.ownerDocument == parent.ownerDocument }
+            .filterIsInstance<FreeAtomAttribute>()
+            .filter { it.atomRestrictions.size > 0 }
+            .forEach { el ->
+                val obj = parent.ownerDocument.createElement("obj")
+                val fqn = getFqn(el.name, el.holderObject)
+                obj.setAttribute("fqn", fqn)
+                val inferred: Element = parent.ownerDocument.createElement("inferred")
+                graph.igNodes.filter { node ->
+                    node.name ?: return@filter false
+                    for (attr in el.atomRestrictions) {
+                        // @todo #14:30min differentiate not only by name but also by the number of parameters
+                        node.attributes.find { it.name == attr } ?: return@filter false
                     }
                     return@filter true
                 }.forEach {
