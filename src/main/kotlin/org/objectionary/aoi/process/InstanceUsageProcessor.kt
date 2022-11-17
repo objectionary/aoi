@@ -49,17 +49,17 @@ class InstanceUsageProcessor(private val graph: Graph) {
                 val igAbstract = graph.igNodes.find { it.name == name(parentAbstract) && it.body == parentAbstract }
                 if (igAbstract != null && isParameter(parentAbstract, base(obj)?.removePrefix("."))) {
                     val application = obj.nextSibling.nextSibling
-                    if (base(application)?.startsWith(".") == true &&
-                            FreeAttributesHolder.storage.find {
+                    if (base(application)?.startsWith(".") == true) {
+                        FreeAttributesHolder.storage
+                            .find {
                                 it.name == base(obj)!!.removePrefix(".") && it.holderObject == parentAbstract
-                            } == null
-                    ) {
-                        FreeAttributesHolder.storage.add(
-                            FreeAttribute(
-                                base(obj)!!.removePrefix("."),
-                                parentAbstract
+                            }
+                            ?: FreeAttributesHolder.storage.add(
+                                FreeAttribute(
+                                    base(obj)!!.removePrefix("."),
+                                    parentAbstract
+                                )
                             )
-                        )
                         FreeAttributesHolder.storage.find {
                             it.name == base(obj)!!.removePrefix(".") && it.holderObject == parentAbstract
                         }?.appliedAttributes?.add(Parameter(base(application)!!))
