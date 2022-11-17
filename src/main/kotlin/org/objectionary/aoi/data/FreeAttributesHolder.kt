@@ -42,7 +42,7 @@ object FreeAttributesHolder {
  * @property name attribute name
  * @property holderObject parent object body
  */
-data class FreeAttribute(val name: String, val holderObject: Node) {
+open class FreeAttribute(open val name: String, open val holderObject: Node) {
     /**
      * Set of the attributes of this free attribute that were applied in the program
      */
@@ -55,13 +55,10 @@ data class FreeAttribute(val name: String, val holderObject: Node) {
  * @property name attribute name
  * @property holderObject parent object body
  */
-data class FreeAtomAttribute(val name: String, val holderObject: Node) {
-    /**
-     * Set of the attributes of this free attribute that were applied in the program
-     * I don't think we'll need it though, todo discuss
-     */
-    val appliedAttributes: MutableSet<Parameter> = mutableSetOf()
-
+data class FreeAtomAttribute(
+    override val name: String,
+    override val holderObject: Node
+) : FreeAttribute(name, holderObject) {
     /**
      * Set of restrictions derived from atom semantics
      */

@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<atom>
-  <name>bool</name>
-  <objects>
-    <o name="bool"/>
-  </objects>
-</atom>
+<list>
+  <atom>
+    <name>bool.and</name>
+    <objects>
+      <o name="bool"/>
+    </objects>
+  </atom>
+  <atom>
+    <name>bool.or</name>
+    <objects>
+      <o name="bool"/>
+    </objects>
+  </atom>
+  <atom>
+    <name>bool.if</name>
+    <objects>
+      <o name="bool"/>
+    </objects>
+  </atom>
+</list>
