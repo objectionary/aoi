@@ -31,14 +31,12 @@ import org.objectionary.aoi.process.InstanceUsageProcessor
 import org.objectionary.aoi.transformer.XmirTransformer
 import org.objectionary.ddr.graph.AttributesSetter
 import org.objectionary.ddr.graph.CondAttributesSetter
+import org.objectionary.ddr.graph.GraphBuilder
 import org.objectionary.ddr.graph.InnerPropagator
-import org.objectionary.ddr.launch.buildGraph
-import org.objectionary.ddr.launch.documents
+import org.objectionary.ddr.sources.SrsTransformed
+import org.objectionary.ddr.transform.XslTransformer
 import org.slf4j.LoggerFactory
 import java.io.File
-
-private val logger = LoggerFactory.getLogger("org.objectionary.oi.launch.Launcher")
-private val sep = File.separatorChar
 
 /**
  * Aggregates the whole pipeline.
@@ -46,15 +44,14 @@ private val sep = File.separatorChar
  * @param path to input directory
  */
 fun launch(path: String) {
-    documents.clear()
     FreeAttributesHolder.storage.clear()
-    val graph = buildGraph(path, false, "aoi")
+    val documents = SrsTransformed(path, XslTransformer(), "aoi", false).walk()
+    val graph = GraphBuilder(documents).createGraph()
     CondAttributesSetter(graph).processConditions()
     AttributesSetter(graph).setAttributes()
     AtomsProcessor(graph).processAtoms()
     InnerPropagator(graph).propagateInnerAttrs()
     InnerUsageProcessor(graph).processInnerUsages()
     InstanceUsageProcessor(graph).processInstanceUsages()
-    val transformer = XmirTransformer(graph, documents)
-    transformer.addAoiSection()
+    XmirTransformer(graph, documents).addAoiSection()
 }

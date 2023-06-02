@@ -28,10 +28,11 @@ import org.objectionary.aoi.TestBase
 import org.objectionary.aoi.data.FreeAttributesHolder
 import org.objectionary.ddr.graph.AttributesSetter
 import org.objectionary.ddr.graph.CondAttributesSetter
+import org.objectionary.ddr.graph.GraphBuilder
 import org.objectionary.ddr.graph.InnerPropagator
 import org.objectionary.ddr.graph.repr.Graph
-import org.objectionary.ddr.launch.buildGraph
-import org.objectionary.ddr.launch.documents
+import org.objectionary.ddr.sources.SrsTransformed
+import org.objectionary.ddr.transform.XslTransformer
 import org.apache.commons.io.FileUtils
 import org.slf4j.LoggerFactory
 import java.io.BufferedReader
@@ -47,9 +48,9 @@ open class UnitTestBase : TestBase {
 
     override fun doTest() {
         val path = getTestName()
-        documents.clear()
         FreeAttributesHolder.storage.clear()
-        val graph = buildGraph(constructInPath(path))
+        val graph = GraphBuilder(
+            SrsTransformed(constructInPath(path), XslTransformer(), "aoi", false).walk()).createGraph()
         CondAttributesSetter(graph).processConditions()
         AttributesSetter(graph).setAttributes()
         InnerPropagator(graph).propagateInnerAttrs()
@@ -63,7 +64,9 @@ open class UnitTestBase : TestBase {
         checkOutput(expected, actual)
         try {
             val tmpDir =
-                Paths.get("${constructInPath(path).replace('/', sep).substringBeforeLast(sep)}${sep}TMP").toString()
+                Paths.get(
+                    "${constructInPath(path).replace('/', sep).substringBeforeLast(sep)}${sep}TMP"
+                ).toString()
             FileUtils.deleteDirectory(File(tmpDir))
         } catch (e: Exception) {
             logger.error(e.printStackTrace().toString())
