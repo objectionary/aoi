@@ -42,7 +42,7 @@ import org.w3c.dom.Document
  *
  * @property documents all documents from analyzed directory
  */
-/* todo #108:60min this class is almost copy-paste of DdrWorkflow class from ddr repository. So Workflow interface and
+/* todo #54:30min this class is almost copy-paste of DdrWorkflow class from ddr repository. So Workflow interface and
     AnalysisWorkflow base class should be created in ddr repository. After next ddr release this class should be
     rewritten. */
 class AoiWorkflow(val documents: MutableMap<Document, String>) {
