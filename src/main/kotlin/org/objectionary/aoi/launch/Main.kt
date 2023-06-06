@@ -29,5 +29,5 @@ package org.objectionary.aoi.launch
  * - args[0] path to the folder with the program to be analyzed
  */
 fun main(args: Array<String>) {
-    launch(path = args[0])
+    AoiWorkflow(path = args[0]).launch()
 }
