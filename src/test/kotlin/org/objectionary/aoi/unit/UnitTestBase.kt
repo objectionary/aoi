@@ -38,6 +38,7 @@ import org.slf4j.LoggerFactory
 import java.io.BufferedReader
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.nio.file.Path
 import java.nio.file.Paths
 
 /**
@@ -50,7 +51,7 @@ open class UnitTestBase : TestBase {
         val path = getTestName()
         FreeAttributesHolder.storage.clear()
         val graph = GraphBuilder(
-            SrsTransformed(constructInPath(path), XslTransformer(), "aoi", false).walk()).createGraph()
+            SrsTransformed(constructInPath(path), XslTransformer(), "aoi").walk()).createGraph()
         CondAttributesSetter(graph).processConditions()
         AttributesSetter(graph).setAttributes()
         InnerPropagator(graph).propagateInnerAttrs()
@@ -58,14 +59,14 @@ open class UnitTestBase : TestBase {
         val out = ByteArrayOutputStream()
         printAttributes(out)
         val actual = String(out.toByteArray())
-        val bufferedReader: BufferedReader = File(constructOutPath(path)).bufferedReader()
+        val bufferedReader: BufferedReader = constructOutPath(path).toFile().bufferedReader()
         val expected = bufferedReader.use { it.readText() }
         logger.debug(actual)
         checkOutput(expected, actual)
         try {
             val tmpDir =
                 Paths.get(
-                    "${constructInPath(path).replace('/', sep).substringBeforeLast(sep)}${sep}TMP"
+                    "${constructInPath(path).toString().replace('/', sep).substringBeforeLast(sep)}${sep}TMP"
                 ).toString()
             FileUtils.deleteDirectory(File(tmpDir))
         } catch (e: Exception) {
@@ -93,5 +94,5 @@ open class UnitTestBase : TestBase {
         }
     }
 
-    override fun constructOutPath(directoryName: String) = ""
+    override fun constructOutPath(directoryName: String): Path = Path.of("")
 }

@@ -30,6 +30,7 @@ import org.objectionary.aoi.process.InstanceUsageProcessor
 import org.objectionary.aoi.unit.UnitTestBase
 import org.objectionary.ddr.graph.repr.Graph
 import java.io.File
+import java.nio.file.Path
 
 /**
  * Base class for graph builder testing
@@ -41,13 +42,13 @@ open class InitBase : UnitTestBase() {
         InitializationProcessor(graph).processInitializations()
     }
 
-    override fun constructOutPath(directoryName: String): String =
-        File(System.getProperty("user.dir")).resolve(
+    override fun constructOutPath(directoryName: String): Path =
+        Path.of(File(System.getProperty("user.dir")).resolve(
             File("src${sep}test${sep}resources${sep}unit${sep}out${sep}init$sep$directoryName.txt")
-        ).absolutePath.replace("/", File.separator)
+        ).absolutePath.replace("/", File.separator))
 
-    override fun constructInPath(directoryName: String): String =
-        File(System.getProperty("user.dir")).resolve(
+    override fun constructInPath(directoryName: String): Path =
+        Path.of(File(System.getProperty("user.dir")).resolve(
             File("src${sep}test${sep}resources${sep}unit${sep}in${sep}init$sep$directoryName")
-        ).absolutePath.replace("/", File.separator)
+        ).absolutePath.replace("/", File.separator))
 }

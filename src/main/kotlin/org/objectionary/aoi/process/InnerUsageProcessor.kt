@@ -27,11 +27,9 @@ package org.objectionary.aoi.process
 import org.objectionary.aoi.data.FreeAttribute
 import org.objectionary.aoi.data.FreeAttributesHolder
 import org.objectionary.aoi.data.Parameter
-import org.objectionary.ddr.graph.abstract
-import org.objectionary.ddr.graph.base
-import org.objectionary.ddr.graph.line
-import org.objectionary.ddr.graph.name
 import org.objectionary.ddr.graph.repr.Graph
+import org.objectionary.ddr.util.containsAttr
+import org.objectionary.ddr.util.getAttrContent
 import org.w3c.dom.Node
 
 /**
@@ -58,16 +56,17 @@ class InnerUsageProcessor(private val graph: Graph) {
                     continue
                 }
                 deepTraversal(ch, origNode)
-                if (base(ch) == null && name(ch) != null && abstract(ch) == null &&
-                        (line(ch) == line(node) || line(ch)?.toInt() == line(node)?.toInt()?.plus(1))
+                if (!ch.containsAttr("base") && ch.containsAttr("name") && !ch.containsAttr("abstract") &&
+                        (ch.getAttrContent("line") == node.getAttrContent("line") ||
+                                ch.getAttrContent("line")?.toInt() == node.getAttrContent("line")?.toInt()?.plus(1))
                 ) {
-                    FreeAttributesHolder.storage.find { it.name == name(ch)!! && it.holderObject == origNode }
-                        ?: FreeAttributesHolder.storage.add(FreeAttribute(name(ch)!!, origNode))
+                    FreeAttributesHolder.storage.find { it.name == ch.getAttrContent("name")!! && it.holderObject == origNode }
+                        ?: FreeAttributesHolder.storage.add(FreeAttribute(ch.getAttrContent("name")!!, origNode))
                 }
-                base(ch)?.let {
-                    FreeAttributesHolder.storage.find { it.name == base(ch) && it.holderObject == origNode }
+                ch.getAttrContent("base")?.let {
+                    FreeAttributesHolder.storage.find { it.name == ch.getAttrContent("base") && it.holderObject == origNode }
                         ?.let { fa ->
-                            base(ch.nextSibling.nextSibling)?.let {
+                            ch.nextSibling.nextSibling.getAttrContent("base")?.let {
                                 fa.appliedAttributes.add(Parameter(it))
                             }
                         }

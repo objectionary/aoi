@@ -26,11 +26,9 @@ package org.objectionary.aoi.process
 
 import org.objectionary.aoi.data.FreeAtomAttribute
 import org.objectionary.aoi.data.FreeAttributesHolder
-import org.objectionary.ddr.graph.abstract
-import org.objectionary.ddr.graph.base
-import org.objectionary.ddr.graph.line
-import org.objectionary.ddr.graph.name
 import org.objectionary.ddr.graph.repr.Graph
+import org.objectionary.ddr.util.containsAttr
+import org.objectionary.ddr.util.getAttrContent
 import org.slf4j.LoggerFactory
 import org.w3c.dom.Document
 import javax.xml.parsers.DocumentBuilderFactory
@@ -48,7 +46,7 @@ class AtomsProcessor(private val graph: Graph) {
     fun processAtoms() {
         graph.initialObjects.forEach { obj ->
             obj.attributes?.getNamedItem("atom")?.textContent?.let { atom ->
-                name(obj)?.let { name ->
+                obj.getAttrContent("name")?.let { name ->
                     val docObjects = getAtomsDocument()?.getElementsByTagName("atom") ?: return@forEach
                     val fqn = "$atom.$name"
                     for (i in 0 until docObjects.length) {
@@ -61,14 +59,15 @@ class AtomsProcessor(private val graph: Graph) {
                                 if (ch.attributes == null || ch.attributes.length == 0) {
                                     continue
                                 }
-                                if (base(ch) == null && name(ch) != null && abstract(ch) == null &&
-                                        (line(ch) == line(obj) || line(ch)?.toInt() == line(obj)?.toInt()?.plus(1))
+                                if (!ch.containsAttr("base") && ch.containsAttr("name") && !ch.containsAttr("abstract") &&
+                                        (ch.getAttrContent("line") == obj.getAttrContent("line") ||
+                                                ch.getAttrContent("line")?.toInt() == obj.getAttrContent("line")?.toInt()?.plus(1))
                                 ) {
-                                    val freeAtomAttr = FreeAtomAttribute(name(ch)!!, obj)
+                                    val freeAtomAttr = FreeAtomAttribute(ch.getAttrContent("name")!!, obj)
                                     val objects = atomNode.childNodes.item(3).childNodes
                                     for (k in 0 until objects.length) {
                                         val objNode = objects.item(k)
-                                        name(objNode)?.let { freeAtomAttr.atomRestrictions.add(it) }
+                                        objNode.getAttrContent("name")?.let { freeAtomAttr.atomRestrictions.add(it) }
                                     }
                                     FreeAttributesHolder.storage.add(freeAtomAttr)
                                 }

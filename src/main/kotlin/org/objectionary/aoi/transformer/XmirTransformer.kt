@@ -26,14 +26,15 @@ package org.objectionary.aoi.transformer
 
 import org.objectionary.aoi.data.FreeAtomAttribute
 import org.objectionary.aoi.data.FreeAttributesHolder
-import org.objectionary.ddr.graph.name
 import org.objectionary.ddr.graph.repr.Graph
+import org.objectionary.ddr.util.getAttrContent
 import org.w3c.dom.Document
 import org.w3c.dom.Element
 import org.w3c.dom.Node
 import java.io.FileOutputStream
 import java.io.OutputStream
 import java.io.UnsupportedEncodingException
+import java.nio.file.Path
 import javax.xml.transform.OutputKeys
 import javax.xml.transform.TransformerException
 import javax.xml.transform.TransformerFactory
@@ -46,7 +47,7 @@ import javax.xml.transform.stream.StreamSource
  */
 class XmirTransformer(
     private val graph: Graph,
-    private val documents: MutableMap<Document, String>
+    private val documents: MutableMap<Document, Path>
 ) {
     /**
      * Aggregates the process of adding an aoi section to xmir documents
@@ -111,8 +112,8 @@ class XmirTransformer(
     private fun getFqn(name: String, par: Node): String {
         var fqn = name
         var parent = par
-        while (name(parent) != null) {
-            fqn = "${name(parent)}.$fqn"
+        while (parent.getAttrContent("name") != null) {
+            fqn = "${parent.getAttrContent("name")}.$fqn"
             parent = parent.parentNode
         }
         return fqn
@@ -120,7 +121,7 @@ class XmirTransformer(
 
     private fun transformDocuments() {
         documents.forEach { doc ->
-            val outputStream = FileOutputStream(doc.value)
+            val outputStream = FileOutputStream(doc.value.toFile())
             outputStream.use { writeXml(it, doc.key) }
         }
     }

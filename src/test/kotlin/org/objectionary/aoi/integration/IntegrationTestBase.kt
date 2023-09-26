@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory
 import java.io.BufferedReader
 import java.io.File
 import java.nio.file.Files
-import java.nio.file.Paths
+import java.nio.file.Path
 
 /**
  * Base class for testing decorators resolver
@@ -41,12 +41,12 @@ open class IntegrationTestBase : TestBase {
 
     override fun doTest() {
         val path = getTestName()
-        AoiWorkflow(constructInPath(path)).launch()
+        AoiWorkflow(constructInPath(path).toString()).launch()
         val actualFiles: MutableList<String> = mutableListOf()
-        Files.walk(Paths.get(constructOutPath(path)))
+        Files.walk(constructOutPath(path))
             .filter(Files::isRegularFile)
             .forEach { actualFiles.add(it.toString()) }
-        Files.walk(Paths.get(constructResultPath(path)))
+        Files.walk(constructResultPath(path))
             .filter(Files::isRegularFile)
             .forEach { file ->
                 val actualBr: BufferedReader = File(file.toString()).bufferedReader()
@@ -60,25 +60,25 @@ open class IntegrationTestBase : TestBase {
             }
         try {
             val tmpDir =
-                Paths.get((constructResultPath(path))).toString()
+                (constructResultPath(path)).toString()
             FileUtils.deleteDirectory(File(tmpDir))
         } catch (e: Exception) {
             logger.error(e.printStackTrace().toString())
         }
     }
 
-    override fun constructOutPath(directoryName: String): String =
-        File(System.getProperty("user.dir")).resolve(
+    override fun constructOutPath(directoryName: String): Path =
+        Path.of(File(System.getProperty("user.dir")).resolve(
             File("src${sep}test${sep}resources${sep}integration${sep}out$sep$directoryName")
-        ).absolutePath.replace("/", File.separator)
+        ).absolutePath.replace("/", File.separator))
 
-    override fun constructInPath(directoryName: String): String =
-        File(System.getProperty("user.dir")).resolve(
+    override fun constructInPath(directoryName: String): Path =
+        Path.of(File(System.getProperty("user.dir")).resolve(
             File("src${sep}test${sep}resources${sep}integration${sep}in$sep$directoryName")
-        ).absolutePath.replace("/", File.separator)
+        ).absolutePath.replace("/", File.separator))
 
-    private fun constructResultPath(directoryName: String): String =
-        File(System.getProperty("user.dir")).resolve(
+    private fun constructResultPath(directoryName: String): Path =
+        Path.of(File(System.getProperty("user.dir")).resolve(
             File("src${sep}test${sep}resources${sep}integration${sep}in$sep${directoryName}_aoi")
-        ).absolutePath.replace("/", File.separator)
+        ).absolutePath.replace("/", File.separator))
 }

@@ -25,6 +25,7 @@
 package org.objectionary.aoi
 
 import java.io.File
+import java.nio.file.Path
 import kotlin.test.assertEquals
 
 /**
@@ -63,13 +64,14 @@ interface TestBase {
      * @param directoryName name of the input directory
      * @return path to input location
      */
-    fun constructInPath(directoryName: String): String = "src${sep}test${sep}resources${sep}unit${sep}in$sep$directoryName"
+    fun constructInPath(directoryName: String): Path =
+        Path.of("src${sep}test${sep}resources${sep}unit${sep}in$sep$directoryName")
 
     /**
      * @param directoryName name of the output directory
      * @return path to output location
      */
-    fun constructOutPath(directoryName: String): String
+    fun constructOutPath(directoryName: String): Path
 
     /**
      * @return name of the test being executed

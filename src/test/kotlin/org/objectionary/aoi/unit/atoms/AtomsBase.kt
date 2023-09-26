@@ -30,10 +30,11 @@ import org.objectionary.aoi.process.AtomsProcessor
 import org.objectionary.aoi.process.InnerUsageProcessor
 import org.objectionary.aoi.process.InstanceUsageProcessor
 import org.objectionary.aoi.unit.UnitTestBase
-import org.objectionary.ddr.graph.name
 import org.objectionary.ddr.graph.repr.Graph
+import org.objectionary.ddr.util.getAttrContent
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.nio.file.Path
 
 /**
  * Base class for graph builder testing
@@ -45,19 +46,19 @@ open class AtomsBase : UnitTestBase() {
         InstanceUsageProcessor(graph).processInstanceUsages()
     }
 
-    override fun constructOutPath(directoryName: String): String =
-        File(System.getProperty("user.dir")).resolve(
+    override fun constructOutPath(directoryName: String): Path =
+        Path.of(File(System.getProperty("user.dir")).resolve(
             File("src${sep}test${sep}resources${sep}unit${sep}out${sep}atoms$sep$directoryName.txt")
-        ).absolutePath.replace("/", File.separator)
+        ).absolutePath.replace("/", File.separator))
 
-    override fun constructInPath(directoryName: String): String =
-        File(System.getProperty("user.dir")).resolve(
+    override fun constructInPath(directoryName: String): Path =
+        Path.of(File(System.getProperty("user.dir")).resolve(
             File("src${sep}test${sep}resources${sep}unit${sep}in${sep}atoms$sep$directoryName")
-        ).absolutePath.replace("/", File.separator)
+        ).absolutePath.replace("/", File.separator))
 
     override fun printAttributes(out: ByteArrayOutputStream) {
         FreeAttributesHolder.storage.forEach { attr ->
-            out.writeBytes("ATTR (${if (attr is FreeAtomAttribute) "atom" else "not atom"}): _${name(attr.holderObject)}.${attr.name}_".toByteArray())
+            out.writeBytes("ATTR (${if (attr is FreeAtomAttribute) "atom" else "not atom"}): _${attr.holderObject.getAttrContent("name")}.${attr.name}_".toByteArray())
             attr.appliedAttributes.forEach { out.writeBytes(it.name.toByteArray()) }
         }
     }

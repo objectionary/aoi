@@ -30,11 +30,10 @@ import org.objectionary.aoi.process.InstanceUsageProcessor
 import org.objectionary.aoi.transformer.XmirTransformer
 import org.objectionary.ddr.graph.AttributesSetter
 import org.objectionary.ddr.graph.CondAttributesSetter
-import org.objectionary.ddr.graph.GraphBuilder
 import org.objectionary.ddr.graph.InnerPropagator
-import org.objectionary.ddr.sources.SrsTransformed
-import org.objectionary.ddr.transform.XslTransformer
+import org.objectionary.ddr.launch.XmirAnalysisWorkflow
 import org.w3c.dom.Document
+import java.nio.file.Path
 
 /**
  * Stores all the information from xmir files in the form of a graph. Launches various analysis or transformation steps
@@ -45,9 +44,13 @@ import org.w3c.dom.Document
 /* todo #54:30min this class is almost copy-paste of DdrWorkflow class from ddr repository. So Workflow interface and
     AnalysisWorkflow base class should be created in ddr repository. After next ddr release this class should be
     rewritten. */
-class AoiWorkflow(val documents: MutableMap<Document, String>) {
-    /** @property graph decoration hierarchy graph of xmir files from analyzed directory */
-    private val graph = GraphBuilder(documents).createGraph()
+class AoiWorkflow : XmirAnalysisWorkflow {
+    /**
+     * Constructs workflow class using documents
+     *
+     * @param documents all documents from analyzed directory
+     */
+    constructor(documents: MutableMap<Document, Path>) : super(documents)
 
     /**
      * Constructs [documents] from [path]
@@ -55,13 +58,12 @@ class AoiWorkflow(val documents: MutableMap<Document, String>) {
      * @param path path to the directory to be analysed
      * @param postfix postfix of the resulting directory
      */
-    constructor(path: String, postfix: String = "aoi") : this(
-        SrsTransformed(path, XslTransformer(), postfix, false).walk())
+    constructor(path: String, postfix: String = "aoi") : super(path, postfix)
 
     /**
      * Aggregates all steps of analysis
      */
-    fun launch() {
+    override fun launch() {
         CondAttributesSetter(graph).processConditions()
         AttributesSetter(graph).setAttributes()
         AtomsProcessor(graph).processAtoms()
