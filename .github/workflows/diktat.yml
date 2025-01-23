@@ -1,6 +1,6 @@
 name: Run DiKTat analysis
 
-on:
+'on':
   push:
     branches: [ master ]
   pull_request:
