@@ -35,10 +35,10 @@ with a name `$(path_to_your_directory}_aoi` will be created near your source dir
 
 ### Pipeline
 
-The tool receives a path to the directory with .xmir files as an input.  
+The tool receives a path to the directory with .xmir files as an input.
 AOI generates a new `${PATH}_aoi` directory, located near your input directory, with modified xmir files.
 
-Let's see how it modifies .xmir files on an example.  
+Let's see how it modifies .xmir files on an example.
 Consider the following EO program:
 ```
 [] > cat
@@ -81,7 +81,7 @@ The following block in the corresponding .xmir file will be generated from this 
 </aoi>
 ```
 
-As we can see, object `x` from `pet1` is only used with its `talk` attribute, therefore it can either be 
+As we can see, object `x` from `pet1` is only used with its `talk` attribute, therefore it can either be
 an instance of `cat` or `dog`. Whereas `x` located `pet2` is used with both `talk` and `eat`, which
 lets us determine that `x` can only be an instance of `dog`.
 
