@@ -1,6 +1,4 @@
 /*
- * The MIT License (MIT)
- *
  * SPDX-FileCopyrightText: Copyright (c) 2022 Olesia Subbotina
  * SPDX-License-Identifier: MIT
  */
