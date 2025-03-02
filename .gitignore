@@ -1,5 +1,8 @@
-object-inference.iml
-.idea
-target/
 *TMP/
 *_aoi
+.DS_Store
+.idea
+.idea/
+node_modules/
+object-inference.iml
+target/
