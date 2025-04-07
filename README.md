@@ -1,7 +1,7 @@
 <img alt="logo" src="https://www.objectionary.com/cactus.svg" height="100px" />
 
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
-[![DevOps By Rultor.com](http://www.rultor.com/b/objectionary/eo-files)](http://www.rultor.com/p/objectionary/aoi)
+[![DevOps By Rultor.com](https://www.rultor.com/b/objectionary/eo-files)](https://www.rultor.com/p/objectionary/aoi)
 [![We recommend IntelliJ IDEA](https://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
 
 [![mvn](https://github.com/objectionary/ddr/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/objectionary/aoi/actions/workflows/build.yml)
