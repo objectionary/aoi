@@ -1,8 +1,14 @@
-*TMP/
-*_aoi
-.DS_Store
-.idea
-.idea/
-node_modules/
-object-inference.iml
+### Maven ###
 target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### IntelliJ IDEA ###
+.idea/
+*.iml
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
