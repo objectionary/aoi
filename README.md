@@ -13,7 +13,7 @@
 AOI is a project aiming at performing Abstract Object Inference for [EO](https://www.eolang.org)
 Programs.
 
-### How to Contribute
+## How to Contribute
 
 Fork repository, make changes, send us a pull request. We will review your changes and apply them to
 the master branch shortly, provided they don't violate our quality standards. To avoid frustration,
