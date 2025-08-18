@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 Objectionary.com
+# SPDX-License-Identifier: MIT
+---
+default: true
+MD013:
+  line_length: 100
+  code_blocks: false
+MD004:
+  style: dash
+MD033:
+  allowed_elements:
+    - img

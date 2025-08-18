@@ -1,7 +1,6 @@
-# SPDX-FileCopyrightText: Copyright (c) 2022 Olesia Subbotina
+# SPDX-FileCopyrightText: Copyright (c) 2025 Objectionary.com
 # SPDX-License-Identifier: MIT
 ---
-# yamllint disable rule:line-length
 name: actionlint
 'on':
   push:
@@ -15,11 +14,11 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Download actionlint
-        id: get_actionlint
+        id: download-actionlint
         run: bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
         shell: bash
       - name: Check workflow files
-        run: ${{ steps.get_actionlint.outputs.executable }} -color
+        run: ${{ steps.download-actionlint.outputs.executable }} -color
         shell: bash

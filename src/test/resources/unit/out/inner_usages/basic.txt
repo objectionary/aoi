@@ -1,8 +1,0 @@
-ATTR: dir
-ATTR: dir
-ATTR: x
-.talk
-.move
-ATTR: x
-.talk
-.smth

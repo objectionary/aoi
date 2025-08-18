@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- * SPDX-FileCopyrightText: Copyright (c) 2022 Olesia Subbotina
+ * SPDX-FileCopyrightText: Copyright (c) 2025 Objectionary.com
  * SPDX-License-Identifier: MIT
 -->
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.jcabi</groupId>
     <artifactId>parent</artifactId>
-    <version>0.64.1</version>
+    <version>0.69.6</version>
   </parent>
-  <artifactId>aoi</artifactId>
   <groupId>org.eolang</groupId>
+  <artifactId>aoi</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>aoi</name>
   <description>Abstract Object Inference for EO</description>
   <url>https://github.com/objectionary/aoi</url>
-  <inceptionYear>2022</inceptionYear>
+  <inceptionYear>2025</inceptionYear>
   <organization>
-    <name>objectionary</name>
-    <url>https://github.com/objectionary/aoi</url>
+    <name>EO</name>
+    <url>https://github.com/objectionary/eo</url>
   </organization>
   <licenses>
     <license>
@@ -32,10 +32,9 @@
   <developers>
     <developer>
       <id>1</id>
-      <name>Olesia Subbotina</name>
-      <email>lesya.sub@mail.ru</email>
-      <organization>yegor256.com</organization>
-      <organizationUrl>https://www.yegor256.com</organizationUrl>
+      <name>Andrey Chernykh</name>
+      <email>andreychernykh04@gmail.com</email>
+      <organization>open-source</organization>
       <roles>
         <role>Architect</role>
         <role>Developer</role>
@@ -47,14 +46,9 @@
     <system>GitHub</system>
     <url>https://github.com/objectionary/aoi/issues</url>
   </issueManagement>
-  <scm>
-    <connection>scm:git:git@github.com:objectionary/aoi.git</connection>
-    <developerConnection>scm:git:git@github.com:objectionary/aoi.git</developerConnection>
-    <url>https://github.com/objectionary/aoi</url>
-  </scm>
   <ciManagement>
-    <system>rultor</system>
-    <url>https://www.rultor.com/s/aoi</url>
+    <system>Rultor</system>
+    <url>https://www.rultor.com</url>
   </ciManagement>
   <distributionManagement>
     <site>
@@ -62,229 +56,35 @@
       <url>https://github.com/objectionary/aoi</url>
     </site>
   </distributionManagement>
+  <scm>
+    <connection>scm:git:git@github.com:objectionary/aoi.git</connection>
+    <developerConnection>scm:git:git@github.com:objectionary/aoi.git</developerConnection>
+    <url>https://github.com/objectionary/aoi</url>
+  </scm>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>17</java.version>
-    <kotlin.code.style>official</kotlin.code.style>
-    <kotlin.version>2.1.10</kotlin.version>
-    <diktat-check.version>1.2.5</diktat-check.version>
+    <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
-    <dokka.version>2.0.0</dokka.version>
   </properties>
-  <repositories>
-    <repository>
-      <id>mavenCentral</id>
-      <url>https://repo1.maven.org/maven2/</url>
-    </repository>
-    <repository>
-      <id>jitpack.io</id>
-      <url>https://jitpack.io</url>
-    </repository>
-  </repositories>
-  <build>
-    <sourceDirectory>src/main/kotlin</sourceDirectory>
-    <testSourceDirectory>src/test/kotlin</testSourceDirectory>
-    <plugins>
-      <plugin>
-        <groupId>org.jetbrains.kotlin</groupId>
-        <artifactId>kotlin-maven-plugin</artifactId>
-        <version>2.1.10</version>
-        <executions>
-          <execution>
-            <id>compile</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>compile</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>test-compile</id>
-            <phase>test-compile</phase>
-            <goals>
-              <goal>test-compile</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.4.1</version>
-        <configuration>
-          <sourceFileIncludes>
-            <include>Dummy.java</include>
-          </sourceFileIncludes>
-          <sourcepath>src/main/java/org/objectionary/aoi</sourcepath>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>org.objectionary.aoi.launch.MainKt</mainClass>
-            </manifest>
-          </archive>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-        </configuration>
-        <executions>
-          <execution>
-            <id>make-assembly</id>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.jetbrains.dokka</groupId>
-        <artifactId>dokka-maven-plugin</artifactId>
-        <version>${dokka.version}</version>
-        <executions>
-          <execution>
-            <phase>pre-site</phase>
-            <goals>
-              <goal>dokka</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <sourceLinks>
-            <link>
-              <path>${project.basedir}</path>
-              <url>https://github.com/objectionary/aoi</url>
-              <lineSuffix>#L</lineSuffix>
-            </link>
-          </sourceLinks>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.5.2</version>
-      </plugin>
-      <plugin>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <version>3.2.5</version>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>3.5.0</version>
-        <configuration>
-          <mainClass>MainKt</mainClass>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.sonatype.plugins</groupId>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>1.7.0</version>
-        <extensions>true</extensions>
-      </plugin>
-      <plugin>
-        <groupId>org.cqfn.diktat</groupId>
-        <artifactId>diktat-maven-plugin</artifactId>
-        <version>${diktat-check.version}</version>
-        <executions>
-          <execution>
-            <id>diktat</id>
-            <phase>none</phase>
-            <goals>
-              <goal>check</goal>
-              <goal>fix</goal>
-            </goals>
-            <configuration>
-              <inputs>
-                <input>${project.basedir}/src/main/kotlin</input>
-                <input>${project.basedir}/src/test/kotlin</input>
-              </inputs>
-              <excludes>
-                <exclude>${project.basedir}/src/main/kotlin/generated</exclude>
-              </excludes>
-              <diktatConfigFile>diktat-analysis.yml</diktatConfigFile>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>11</source>
-          <target>11</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
   <dependencies>
     <dependency>
-      <groupId>org.jetbrains.kotlin</groupId>
-      <artifactId>kotlin-test-junit5</artifactId>
-      <version>2.1.10</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.9.3</version>
+      <artifactId>junit-jupiter</artifactId>
+      <!-- version from the parent pom -->
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>2.0.16</version>
-    </dependency>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.5.16</version>
-    </dependency>
-    <dependency>
-      <groupId>org.eolang</groupId>
-      <artifactId>eo-maven-plugin</artifactId>
-      <version>0.28.11</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.eolang</groupId>
-      <artifactId>ddr</artifactId>
-      <version>0.0.11</version>
-    </dependency>
-    <dependency>
-      <groupId>xml-apis</groupId>
-      <artifactId>xml-apis</artifactId>
-      <version>1.4.01</version>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>5.9.3</version>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest</artifactId>
+      <!-- version from the parent pom -->
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.jetbrains</groupId>
-      <artifactId>annotations</artifactId>
-      <version>26.0.2</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>2.18.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jetbrains.kotlin</groupId>
-      <artifactId>kotlin-stdlib</artifactId>
-      <version>${kotlin.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jetbrains.kotlin</groupId>
-      <artifactId>kotlin-test</artifactId>
-      <version>${kotlin.version}</version>
     </dependency>
   </dependencies>
+  <build>
+    <plugins>
+    </plugins>
+  </build>
   <profiles>
     <profile>
       <id>qulice</id>
@@ -294,12 +94,13 @@
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
             <version>0.24.0</version>
-            <configuration>
-              <excludes combine.children="append">
-                <exclude>duplicatefinder:.*</exclude>
-                <exclude>dependencies:ch.qos.logback</exclude>
-              </excludes>
-            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
           </plugin>
         </plugins>
       </build>

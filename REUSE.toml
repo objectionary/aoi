@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: Copyright (c) 2025 Yegor Bugayenko
+# SPDX-FileCopyrightText: Copyright (c) 2025 Objectionary.com
 # SPDX-License-Identifier: MIT
 
 version = 1
@@ -7,15 +7,12 @@ path = [
     "**.json",
     "**.md",
     "**.txt",
-    "**/*.csv",
-    "**/*.jpg",
-    "**/*.json",
-    "**/*.md",
-    "**/*.pdf",
-    "**/*.png",
-    "**/*.svg",
-    "**/*.txt",
-    "**/*.vm",
+    "**.csv",
+    "**.jpg",
+    "**.pdf",
+    "**.png",
+    "**.svg",
+    "**.vm",
     "**/.DS_Store",
     "**/.gitignore",
     "**/CNAME",
@@ -26,5 +23,5 @@ path = [
     "renovate.json",
 ]
 precedence = "override"
-SPDX-FileCopyrightText = "Copyright (c) 2025 Yegor Bugayenko"
+SPDX-FileCopyrightText = "Copyright (c) 2025 Objectionary.com"
 SPDX-License-Identifier = "MIT"
