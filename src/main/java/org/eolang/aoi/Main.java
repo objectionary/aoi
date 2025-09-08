@@ -7,7 +7,7 @@ package org.eolang.aoi;
 /**
  * Main entry point for the AOI (Abstract Object Inference) application.
  *
- * @since 0.2
+ * @since 0.0.2
  */
 @SuppressWarnings("PMD.ProhibitPublicStaticMethods")
 public final class Main {

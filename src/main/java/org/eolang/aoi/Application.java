@@ -14,7 +14,7 @@ import java.util.List;
  * <p>This class handles command-line argument parsing and coordinates the execution
  * of the AOI tool.</p>
  *
- * @since 0.4
+ * @since 0.0.4
  */
 public final class Application {
 

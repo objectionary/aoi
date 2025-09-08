@@ -19,7 +19,7 @@ import java.nio.charset.StandardCharsets;
  * String description = new Resource("/description.txt").content();
  * }</pre>
  *
- * @since 0.4
+ * @since 0.0.4
  */
 public final class Resource {
     /**
@@ -30,9 +30,7 @@ public final class Resource {
     /**
      * Creates a new resource for the specified classpath.
      *
-     * <p>The path should be an absolute classpath reference starting with '/'
-     * for resources in the root of the classpath, or a relative path for resources relative to the
-     * package of the calling class.</p>
+     * <p>The path should be an absolute classpath reference starting with '/'.</p>
      *
      * @param path The classpath to the resource
      */
