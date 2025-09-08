@@ -4,8 +4,6 @@
  */
 package org.eolang.aoi;
 
-import java.util.logging.Logger;
-
 /**
  * Main entry point for the AOI (Abstract Object Inference) application.
  *
@@ -13,11 +11,6 @@ import java.util.logging.Logger;
  */
 @SuppressWarnings("PMD.ProhibitPublicStaticMethods")
 public final class Main {
-    /**
-     * Logger.
-     */
-    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
-
     /**
      * Private constructor to prevent instantiation.
      */
@@ -30,6 +23,6 @@ public final class Main {
      * @param args Command-line arguments
      */
     public static void main(final String[] args) {
-        Main.LOGGER.info("Abstract Object inference for EO Programs");
+        new Application(args, System.out).run();
     }
 }
