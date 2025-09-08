@@ -55,7 +55,10 @@ public final class Application {
         if (arguments.contains("--help")) {
             this.out.println(new Resource("/org/eolang/aoi/help.txt").content());
         } else if (arguments.contains("--version")) {
-            this.out.println(new Resource("/org/eolang/aoi/version.txt").content());
+            this.out.printf(
+                "aoi version %s%n",
+                new Resource("/org/eolang/aoi/version.txt").content()
+            );
         } else {
             if (arguments.size() != 2) {
                 throw new IllegalArgumentException(
