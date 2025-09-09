@@ -7,6 +7,8 @@ package org.eolang.aoi;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
+import org.cactoos.io.ResourceOf;
+import org.cactoos.text.TextOf;
 
 /**
  * Command-line interface for the AOI (Abstract Object Inference) tool.
@@ -53,16 +55,19 @@ public final class Application {
     public void run() {
         final List<String> arguments = Arrays.asList(this.args);
         if (arguments.contains("--help")) {
-            this.out.println(new Resource("/org/eolang/aoi/help.txt").content());
+            this.out.print(new TextOf(new ResourceOf("org/eolang/aoi/help.txt")));
         } else if (arguments.contains("--version")) {
             this.out.printf(
-                "aoi version %s%n",
-                new Resource("/org/eolang/aoi/version.txt").content()
+                "aoi version %s",
+                new TextOf(new ResourceOf("org/eolang/aoi/version.txt"))
             );
         } else {
             if (arguments.size() != 2) {
                 throw new IllegalArgumentException(
-                    "Expected 2 arguments, but got %d argument(s)".formatted(arguments.size())
+                    "Expected 2 arguments (input dir and output dir), but got %d: %s".formatted(
+                        arguments.size(),
+                        String.join(", ", arguments)
+                    )
                 );
             }
             this.out.printf(
