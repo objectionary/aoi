@@ -4,8 +4,16 @@
  */
 package org.eolang.aoi;
 
+import org.eolang.aoi.cli.cmd.AoiCommand;
+import org.eolang.aoi.cli.cmd.CliCommands;
+import org.eolang.aoi.cli.cmd.HelpCommand;
+import org.eolang.aoi.cli.cmd.VersionCommand;
+
 /**
- * Main entry point for the AOI (Abstract Object Inference) application.
+ * The main entry point for the AOI (Abstract Object Inference) application.
+ * <p>
+ * This class is responsible for composing the application's command structure and launching the
+ * command-line interface.
  *
  * @since 0.0.2
  */
@@ -18,11 +26,20 @@ public final class Main {
     }
 
     /**
-     * Runs the application.
+     * Runs the application, exiting with the resulting status code.
      *
-     * @param args Command-line arguments
+     * @param args Command-line arguments.
      */
     public static void main(final String[] args) {
-        new Application(args, System.out).run();
+        System.exit(
+            new Application(
+                new CliCommands(
+                    new HelpCommand(args, System.out),
+                    new VersionCommand(args, System.out),
+                    new AoiCommand(args, System.out)
+                ),
+                System.err
+            ).run()
+        );
     }
 }

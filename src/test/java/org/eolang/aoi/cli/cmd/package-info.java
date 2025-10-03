@@ -4,8 +4,8 @@
  */
 
 /**
- * Tests for {@link org.eolang.aoi}.
+ * Tests for {@link org.eolang.aoi.cli.cmd}.
  *
  * @since 0.0.5
  */
-package org.eolang.aoi;
+package org.eolang.aoi.cli.cmd;
