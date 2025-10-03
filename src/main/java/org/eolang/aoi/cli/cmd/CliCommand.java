@@ -7,7 +7,7 @@ package org.eolang.aoi.cli.cmd;
 /**
  * A command for the Command-Line Interface (CLI).
  *
- * @since 0.0.4
+ * @since 0.0.5
  */
 public interface CliCommand {
     /**

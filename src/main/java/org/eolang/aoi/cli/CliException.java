@@ -7,7 +7,7 @@ package org.eolang.aoi.cli;
 /**
  * A custom runtime exception for command-line interface (CLI) errors.
  *
- * @since 0.0.4
+ * @since 0.0.5
  */
 public final class CliException extends RuntimeException {
 

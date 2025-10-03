@@ -11,7 +11,7 @@ import java.util.List;
  * <p>
  * It delegates execution to the first matching command from its collection.
  *
- * @since 0.0.4
+ * @since 0.0.5
  */
 public final class CliCommands implements CliCommand {
     /**

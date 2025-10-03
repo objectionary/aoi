@@ -15,7 +15,7 @@ import org.eolang.aoi.cli.CliException;
  * It requires exactly two arguments: an input directory and an output directory.
  * Throws a {@link CliException} during execution if the argument count is not 2.
  *
- * @since 0.0.4
+ * @since 0.0.5
  */
 public final class AoiCommand implements CliCommand {
     /**

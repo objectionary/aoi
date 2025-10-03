@@ -9,6 +9,6 @@
  * The core abstraction is the {@link org.eolang.aoi.cli.cmd.CliCommand} interface, which defines
  * the contract for all executable commands.
  *
- * @since 0.0.4
+ * @since 0.0.5
  */
 package org.eolang.aoi.cli.cmd;

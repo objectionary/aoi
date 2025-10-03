@@ -8,6 +8,6 @@
  * <p>
  * Command implementations are located in the {@link org.eolang.aoi.cli.cmd} sub-package.
  *
- * @since 0.0.4
+ * @since 0.0.5
  */
 package org.eolang.aoi.cli;

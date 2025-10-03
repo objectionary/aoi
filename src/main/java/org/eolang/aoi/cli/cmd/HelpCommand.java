@@ -15,7 +15,7 @@ import org.cactoos.text.UncheckedText;
  * <p>
  * This command matches when either no arguments are provided or the {@code --help} flag is present.
  *
- * @since 0.0.4
+ * @since 0.0.5
  */
 public final class HelpCommand implements CliCommand {
     /**
