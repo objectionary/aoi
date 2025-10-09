@@ -4,6 +4,8 @@
  */
 package org.eolang.aoi;
 
+import picocli.CommandLine;
+
 /**
  * Main entry point for the AOI (Abstract Object Inference) application.
  *
@@ -18,11 +20,12 @@ public final class Main {
     }
 
     /**
-     * Runs the application.
+     * Executes the CLI and terminates the JVM with the resulting exit code.
      *
-     * @param args Command-line arguments
+     * @param args Command-line arguments passed to the application.
      */
     public static void main(final String[] args) {
-        new Application(args, System.out).run();
+        final int exit = new CommandLine(new Application()).execute(args);
+        System.exit(exit);
     }
 }
