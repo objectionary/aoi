@@ -11,6 +11,8 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import picocli.CommandLine;
 
 /**
@@ -49,25 +51,27 @@ final class ApplicationTest {
         );
     }
 
-    @Test
-    void applicationPrintsHelpMessageWhenHelpFlagIsPassed() {
+    @ParameterizedTest
+    @ValueSource(strings = {"--help", "-h"})
+    void applicationPrintsHelpMessageWhenHelpFlagIsPassed(final String flag) {
         final CommandLine cmd = new CommandLine(new Application());
         final StringWriter stdout = new StringWriter();
         cmd.setOut(new PrintWriter(stdout));
-        cmd.execute("--help");
+        cmd.execute(flag);
         MatcherAssert.assertThat(
-            "Application did not print the help message to stdout for the --help flag",
+            "Application did not print the help message to stdout for the %s flag".formatted(flag),
             stdout.toString(),
             Matchers.containsString("Usage:")
         );
     }
 
-    @Test
-    void applicationExitsWithZeroCodeWhenHelpFlagIsPassed() {
+    @ParameterizedTest
+    @ValueSource(strings = {"--help", "-h"})
+    void applicationExitsWithZeroCodeWhenHelpFlagIsPassed(final String flag) {
         final CommandLine cmd = new CommandLine(new Application());
-        final int exit = cmd.execute("--help");
+        final int exit = cmd.execute(flag);
         MatcherAssert.assertThat(
-            "Application did not exit with a zero code when the --help flag was used",
+            "Application did not exit with a zero code when the %s flag was used".formatted(flag),
             exit,
             Matchers.is(0)
         );
