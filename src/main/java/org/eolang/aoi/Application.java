@@ -34,7 +34,7 @@ public final class Application implements Callable<Integer> {
      * A standard help option that triggers Picocli's built-in help display.
      */
     @Option(
-        names = {"--help", "-h"},
+        names = "--help",
         usageHelp = true,
         description = "Print this message and exit."
     )
