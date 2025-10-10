@@ -25,7 +25,6 @@ public final class Main {
      * @param args Command-line arguments passed to the application.
      */
     public static void main(final String[] args) {
-        final int exit = new CommandLine(new Application()).execute(args);
-        System.exit(exit);
+        System.exit(new CommandLine(new Application()).execute(args));
     }
 }
