@@ -4,75 +4,64 @@
  */
 package org.eolang.aoi;
 
-import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.List;
-import org.cactoos.io.ResourceOf;
-import org.cactoos.text.TextOf;
+import java.nio.file.Path;
+import java.util.concurrent.Callable;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
+import picocli.CommandLine.Parameters;
 
 /**
- * Command-line interface for the AOI (Abstract Object Inference) tool.
- *
- * <p>This class handles command-line argument parsing and coordinates the execution
- * of the AOI tool.</p>
+ * Command-line interface for the AOI tool.
+ * <p>
+ * Implementing {@link Callable} allows Picocli to treat this class as a command that returns an
+ * exit code.
+ * </p>
  *
  * @since 0.0.4
  */
-public final class Application {
+@Command(
+    name = "aoi",
+    description = {
+        "AOI analyzes EO programs to infer object types. It finds .xmir files in the",
+        "input directory and generates .xml files with type information."
+    },
+    descriptionHeading = "%nDescription:%n",
+    parameterListHeading = "%nArguments:%n",
+    optionListHeading = "%nOptions:%n"
+)
+public final class Application implements Callable<Integer> {
+    /**
+     * A standard help option that triggers Picocli's built-in help display.
+     */
+    @Option(
+        names = "--help",
+        usageHelp = true,
+        description = "Print this message and exit."
+    )
+    private boolean help;
 
     /**
-     * Command-line arguments passed to the application.
+     * The first positional argument, representing the input directory.
      */
-    private final String[] args;
+    @Parameters(
+        index = "0",
+        paramLabel = "<input dir>",
+        description = "Directory with .xmir files (searches recursively)"
+    )
+    private Path input;
 
     /**
-     * Output stream for printing messages and help text.
+     * The second positional argument, representing the output directory.
      */
-    private final PrintStream out;
+    @Parameters(
+        index = "1",
+        paramLabel = "<output dir>",
+        description = "Directory for .xml files with inferred types"
+    )
+    private Path output;
 
-    /**
-     * Creates a new application instance.
-     *
-     * <p>The arguments array is defensively copied to prevent external modification.</p>
-     *
-     * @param args Command-line arguments
-     * @param out  Output stream for messages
-     */
-    public Application(final String[] args, final PrintStream out) {
-        this.args = Arrays.copyOf(args, args.length);
-        this.out = out;
-    }
-
-    /**
-     * Executes the main application logic.
-     *
-     * <p>Note: {@code --help} and {@code --version} flags take precedence over other arguments and
-     * will be processed even if other arguments are invalid.</p>
-     *
-     * @throws IllegalArgumentException if the number of arguments is not exactly 2 (when neither
-     *  {@code --help} nor {@code --version} is specified)
-     */
-    public void run() {
-        final List<String> arguments = Arrays.asList(this.args);
-        if (arguments.contains("--help")) {
-            this.out.print(new TextOf(new ResourceOf("org/eolang/aoi/help.txt")));
-        } else if (arguments.contains("--version")) {
-            this.out.printf(
-                "aoi version %s",
-                new TextOf(new ResourceOf("org/eolang/aoi/version.txt"))
-            );
-        } else {
-            if (arguments.size() != 2) {
-                throw new IllegalArgumentException(
-                    "Expected 2 arguments (input dir and output dir), but got %d: %s".formatted(
-                        arguments.size(),
-                        String.join(", ", arguments)
-                    )
-                );
-            }
-            this.out.printf(
-                "Input directory: %s, Output directory: %s%n", this.args[0], this.args[1]
-            );
-        }
+    @Override
+    public Integer call() throws Exception {
+        return 0;
     }
 }
