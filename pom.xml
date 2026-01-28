@@ -69,9 +69,9 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.cactoos</groupId>
-      <artifactId>cactoos</artifactId>
-      <version>0.57.0</version>
+      <groupId>info.picocli</groupId>
+      <artifactId>picocli</artifactId>
+      <version>4.7.7</version>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
