@@ -6,11 +6,10 @@ package org.eolang.aoi;
 
 /**
  * Main entry point for the AOI (Abstract Object Inference) application.
- *
  * @since 0.0.2
  */
-@SuppressWarnings("PMD.ProhibitPublicStaticMethods")
 public final class Main {
+
     /**
      * Private constructor to prevent instantiation.
      */
@@ -19,7 +18,6 @@ public final class Main {
 
     /**
      * Runs the application.
-     *
      * @param args Command-line arguments
      */
     public static void main(final String[] args) {

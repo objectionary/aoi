@@ -9,20 +9,20 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Temporary dummy test to prevent the "No tests to run!" error from Maven Surefire.
- *
  * @since 0.2
  */
 final class DummyTest {
+
     /**
      * Dummy test method. Always passes.
-     *
      * @since 0.2
      */
     @Test
-    void shouldAlwaysPass() {
-        Assertions.assertTrue(
-            true,
-            "This test should always pass."
+    void passesAlways() {
+        Assertions.assertEquals(
+            2,
+            1 + 1,
+            "Basic arithmetic should hold"
         );
     }
 }
