@@ -47,10 +47,9 @@ public final class Application {
      * Executes the main application logic.
      *
      * <p>Note: {@code --help} and {@code --version} flags take precedence over other arguments and
-     * will be processed even if other arguments are invalid.</p>
-     *
-     * @throws IllegalArgumentException if the number of arguments is not exactly 2 (when neither
-     *  {@code --help} nor {@code --version} is specified)
+     * will be processed even if other arguments are invalid. An {@link IllegalArgumentException}
+     * is thrown if the number of arguments is not exactly 2 (when neither {@code --help} nor
+     * {@code --version} is specified).</p>
      */
     public void run() {
         final List<String> arguments = Arrays.asList(this.args);
