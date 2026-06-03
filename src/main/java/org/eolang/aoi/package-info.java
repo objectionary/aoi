@@ -5,7 +5,6 @@
 
 /**
  * This package contains the main entry point for the AOI (Abstract Object Inference) application.
- *
  * @since 0.2
  */
 package org.eolang.aoi;
